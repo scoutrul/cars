@@ -1,6 +1,6 @@
 <div class="feedback">
 
-	<h3 class="feedback_h3">Ваше мнение - важно</h3>
+	<h3 class="feedback_h3">Ваше мнение об авто</h3>
 	<p class="feedback_p">
 		Вы можете оставить отзыв об эксплуатации Вашего автомобиля
 	</p>

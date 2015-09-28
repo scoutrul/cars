@@ -4,7 +4,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Komtrans</title>
+		<title>Комтранс Клуб</title>
 		<link rel="stylesheet" href="{{ URL::to('/') }}/css/style.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:500,700italic,300,700,500italic,300italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ URL::to('/') }}/css/vendor/popup.css">
@@ -31,6 +31,7 @@
 
 		@yield('body')
 
+		
 		<div id="fill-up-profile-popup" class="mfp-hide popup popup_error">
 			Что бы пользоваться всеми возможностями сайта - заполните профиль.
 		</div>

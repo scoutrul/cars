@@ -7,23 +7,22 @@
 
 			<ul class="footer_list">
 				<li>
-					<a href="/">Главная</a>
+					<a href="{{ route('home') }}">Главная</a>
 				</li>
 				<li>
-					<a href="/catalog">Каталог</a>
+					<a href="{{ route('catalog') }}">Каталог</a>
 				</li>
 				<li>
-					<a href="/feedback">Отзывы</a>
+					<a href="{{ route('feedback') }}">Отзывы</a>
 				</li>
 				<li>
 					<a href="/page/pravila">Правила</a>
 				</li>
 				<li>
-					<a href="/contacts">Контакты</a>
+					<a href="{{ route('contacts') }}">Обратная связь</a>
 				</li>
 				
 			</ul>
-			
 
 		</div>
 
@@ -49,7 +48,7 @@
 			
 			<div class="footer_copyright--text">
 				
-				<h5 class="footer_rights">&copy; 2015г. клуб "Комтранс". Все права защищены. <a href="/page/pravila">Правила пользования сайтом</a>.</h5>
+				<h5 class="footer_rights">&copy; 2015г. клуб "Комтранс". Все права защищены.</h5>
 
 			</div>
 			

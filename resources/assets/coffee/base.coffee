@@ -40,7 +40,7 @@ $.fn.preload = (command) ->
 		@html @data 'text'
 
 $('.sticky').stick_in_parent
-	offset_top: 25
+	offset_top: 5
 
 $.alert = (msg, reload) ->
 

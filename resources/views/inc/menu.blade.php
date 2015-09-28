@@ -6,13 +6,9 @@
 			<div class="menu_btn {{ Request::is('/') ? 'active' : '' }}">
 				<a href="{{ route('home') }}">Главная</a>
 			</div>
-			{{-- <div class="menu_btn {{ Request::is('about') ? 'active' : '' }}">
-				<a href="#">О клубе</a>
-			</div> --}}
+
 			<div class="menu_btn {{ $catalog }}">
-			
 				<a href="{{ route('catalog') }}">Каталог</a>
-			
 			</div>
 
 			<div class="menu_btn {{ $feedback }}">
@@ -20,7 +16,7 @@
 			</div>
 
 			<div class="menu_btn {{ $contacts }}">
-				<a href="{{ route('contacts') }}">Контакты</a>
+				<a href="{{ route('contacts') }}">Обратная связь</a>
 			</div>
 			
 			@foreach($pages as $page)

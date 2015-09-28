@@ -11,7 +11,7 @@
 			@if( ! $user->company)
 				<div id="create-company-button" class="profile-info_company" 
 				href="{{ $user->is_ready() ? '#create-company' : '#fill-up-profile-popup' }}">
-					Создать компанию
+					<!--Создать компанию-->
 				</div>
 			@else
 				<span style="font-size:14px; color:#777">Ваша компания ожидает модерацию</span>
