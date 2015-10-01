@@ -102,7 +102,7 @@ class FeedbackController extends Controller {
 
 	}
 
-	public function mention($type, $make, $id) {
+	public function mention($type, $make, $model, $id) {
 		$f = \App\Feedback::findBySlug($id);
 
 		if($f->status != 1)
