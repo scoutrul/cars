@@ -1,12 +1,21 @@
 <?php namespace App;
 
 use \SleepingOwl\Models\SleepingOwlModel as Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Feedback extends Model {
+class Feedback extends Model implements SluggableInterface{
+
+    use SluggableTrait;
 
 	protected $table = 'feedback';
 
 	protected $fillable = ['header', 'content', 'status'];
+
+    protected $sluggable = [
+        'build_from' => 'header',
+        'save_to'    => 'slug',
+    ];
 
 	public function type() {
 		return $this->belongsTo('App\Type', 'type_id');

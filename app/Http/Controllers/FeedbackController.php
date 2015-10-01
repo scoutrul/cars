@@ -103,14 +103,14 @@ class FeedbackController extends Controller {
 	}
 
 	public function mention($id) {
-
-		$f = \App\Feedback::select('id')->find($id);
+		$f = \App\Feedback::findBySlug($id);
 
 		if($f->status != 1)
 			abort(404);
 
 		if(!$f)
 			abort(404);
+        $id = $f->id;
 
 		$opts = [
 			['1'],

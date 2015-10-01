@@ -11,7 +11,7 @@
 			<div class="mention_info">
 				
 				<div class="feedlist_header">
-					<a href="{{ route('mention', $feed->id) }}">
+					<a href="{{ route('mention', $feed->slug) }}">
 						{{ $feed->header }}</a>
 				</div>
 

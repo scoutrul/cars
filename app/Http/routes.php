@@ -117,7 +117,7 @@ Route::group(['prefix' => 'catalog'], function(){
 
 });
 
-Route::group(['prefix' => 'feedback'], function(){
+Route::group(['prefix' => 'article'], function(){
 
 	get('/', [
 
@@ -126,12 +126,12 @@ Route::group(['prefix' => 'feedback'], function(){
 
 	]);
 
-	get('/id{id}', [
+	get('/{id}', [
 
 		'as' => 'mention',
 		'uses' => 'FeedbackController@mention'
 
-	])->where('id', '[0-9]+');
+	])->where('id', '[a-z+-]+');
 
 	get('{type}/{make}', [
 
