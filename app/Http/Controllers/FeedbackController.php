@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class FeedbackController extends Controller {
 
 	public function index() {
@@ -102,8 +104,8 @@ class FeedbackController extends Controller {
 
 	}
 
-	public function mention($id) {
-		$f = \App\Feedback::findBySlug($id);
+	public function mention(Request $request) {
+		$f = \App\Feedback::findBySlug($request->route('id'));
 
 		if($f->status != 1)
 			abort(404);
