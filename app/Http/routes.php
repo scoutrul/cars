@@ -126,7 +126,7 @@ Route::group(['prefix' => 'article'], function(){
 
 	]);
 
-	get('/{id}', [
+	get('/{type}/{make}/{model}/{id}', [
 
 		'as' => 'mention',
 		'uses' => 'FeedbackController@mention'

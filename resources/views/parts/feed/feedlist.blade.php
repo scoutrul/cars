@@ -11,7 +11,7 @@
 			<div class="mention_info">
 				
 				<div class="feedlist_header">
-					<a href="{{ route('mention', $feed->slug) }}">
+					<a href="{{ route('mention', ['type' => $review->type->name, 'id' => $feed->slug, 'make' => $feed->make->name, 'model' => $feed->model->name]) }}">
 						{{ $feed->header }}</a>
 				</div>
 
