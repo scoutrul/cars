@@ -154,7 +154,13 @@ return [
 		'SleepingOwl\Admin\AdminServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 
-	],
+        /*
+         * External Service Provider
+         */
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+
+
+    ],
 
 	/*
 	|--------------------------------------------------------------------------
