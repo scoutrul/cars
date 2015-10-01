@@ -20,7 +20,7 @@ class CompanyCatalog {
      */
     public static function present($company)
     {
-        if(is_array($company))
+        if(is_array($company) || $company instanceof \Traversable)
             return static::presentMany($company);
         return static::presentOne($company);
     }
@@ -49,7 +49,7 @@ class CompanyCatalog {
         return $arr;
     }
 
-    public static function presentMany(array $companies)
+    public static function presentMany($companies)
     {
         $companiesArray = [];
         foreach($companies as $key => $val){
