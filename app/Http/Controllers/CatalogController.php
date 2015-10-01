@@ -1,214 +1,127 @@
 <?php namespace App\Http\Controllers;
 
+use App\Repository\CarModelRepository;
+use App\Repository\CompanyRepository;
+use App\Repository\MakesRepository;
+use App\Repository\SpecsRepository;
+use App\ViewModel\CompanyCatalog;
+
 class CatalogController extends Controller {
+
+    /**
+     * @var MakesRepository
+     */
+    protected $makesRepository;
+
+    /**
+     * @var SpecsRepository
+     */
+    protected $specsRepository;
+
+    /**
+     * @var CompanyRepository
+     */
+    protected $companyRepository;
+
+    /**
+     * @var CarModelRepository
+     */
+    protected $carModelRepository;
+
+    public function __construct(MakesRepository $makesRepository, SpecsRepository $specsRepository, CompanyRepository $companyRepository, CarModelRepository $carModelRepository)
+    {
+        $this->makesRepository = $makesRepository;
+        $this->specsRepository = $specsRepository;
+        $this->companyRepository = $companyRepository;
+        $this->carModelRepository = $carModelRepository;
+    }
 
 	public function index() {
 
-		$makes = \App\Make::whereHas('companies', function($q){
-			$q->whereStatus(1);
-		})
-		->orderBy('soviet', 'DESC')
-		->orderBy('title', 'ASC')
-		->get();
-
 		return view('pages.catalog.nospecs')
-			->with('makes', $makes)
+			->with('makes', $this->makesRepository->getForCatalogIndex())
 			->with('bread', false);
 
 	}
 
 	public function specs($name) {
 
-		$spec = \App\Spec::whereName($name)->select('id', 'name', 'title')->first();
-
-		if(!$spec) {
+        $spec = $this->specsRepository->getForCatalogByName($name);
+		if(!$spec)
 			abort(404);
-		}
-
-		$bread = ['spec' => $spec];
-
-		$makes = \App\Make::whereHas('companies', function($q) use ($spec){
-
-			$q->where('spec_id', $spec->id);
-			$q->whereStatus(1);
-
-		})->get();
-
-
 		return view('pages.catalog.withspecs')
 			->with('spec', $spec)
-			->with('makes', $makes)
-			->with('bread', $bread);
-
-	}
-
-	public function gatherJSON($c) {
-
-		$companies = [];
-
-		foreach($c as $key => $val){
-
-			$arr = array();
-
-			$t = array();
-
-			$arr['name'] = $val->name;
-			$arr['about'] = $val->about;
-			$arr['phone'] = $val->phone;
-			$arr['logo'] = $val->logo;
-			$arr['address'] = $val->address;
-
-			$t[] = $val->spec->title;
-			$t[] = $val->type->title;
-
-			foreach($val->makes as $k => $v){
-
-				$t[] = $v->title;
-
-			}
-
-			$arr['tags'] = $t;
-
-			$companies[] = $arr;
-
-		}
-
-		return $companies;
+			->with('makes', $this->makesRepository->getForCatalogBySpec($spec))
+			->with('bread', ['spec' => $spec]);
 
 	}
 
 	public function withspecs($spec, $make) {
 
-		$spec = \App\Spec::whereName($spec)->first();
-
+		$spec = $this->specsRepository->getFirstByName($spec);
 		if(!$spec)
 			abort(404);
-
-		$make = \App\Make::whereName($make)->first();
-
+		$make = $this->makesRepository->getFirstByName($make);
 		if(!$make)
 			abort(404);
-
-		$c = \App\Company::whereHas('makes', function($q) use($make){
-			$q->whereId($make->id);
-		})
-		->whereStatus(1)
-		->where('spec_id', $spec->id)
-		->with('models')
-		->take(6)
-		->get();
-
-		$models = \App\CarModel::where('make_id', $make->id)
-		->has('companies')
-		->get();
-
-		$companies = $this->gatherJSON($c);
-
-		$bread = ['spec' => $spec, 'make' => $make];
-
-		return view('pages.catalog.catalog-companies')
-			->with(compact('spec', 'models', 'make', 'bread', 'companies'));
-
+		$models = $this->carModelRepository->getByMakeWithCompanies($make);
+		return view('pages.catalog.catalog-companies', [
+            'spec' => $spec,
+            'models' => $models,
+            'make' => $make,
+            'bread' => ['spec' => $spec, 'make' => $make],
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMakeAndSpec($make, $spec, 6)),
+        ]);
 	}
 
 	public function nospecs($make) {
 
-		$make = \App\Make::whereName($make)->first();
-
+		$make = $this->makesRepository->getFirstByName($make);
 		if(!$make)
 			abort(404);
-
-		$c = \App\Company::whereHas('makes', function($q) use($make){
-			$q->whereId($make->id);
-		})
-		->whereStatus(1)
-		->take(6)
-		->get();
-
-		$companies = $this->gatherJSON($c);
-
-		$models = \App\CarModel::where('make_id', $make->id)
-		->has('companies')
-		->get();
-
-		$bread = ['nospecs' => $make];
-
-		return view('pages.catalog.catalog-companies')
-			->with('bread', $bread)
-			->with('make', $make)
-			->with('models', $models)
-			->with('nospecs', true)
-			->with('companies', $companies);
-
+		return view('pages.catalog.catalog-companies', [
+            'bread' => ['nospecs' => $make],
+            'make' => $make,
+            'models' => $this->carModelRepository->getByMakeWithCompanies($make),
+            'nospecs' => true,
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMake($make, 6)),
+        ]);
 	}
 
 	public function withspecsModel($spec, $make, $model) {
 
-		$spec = \App\Spec::whereName($spec)->first();
-
+		$spec = $this->specsRepository->getFirstByName($spec);
 		if(!$spec)
 			abort(404);
-
-		$make = \App\Make::whereName($make)->first();
-
+		$make = $this->makesRepository->getFirstByName($make);
 		if(!$make)
 			abort(404);
-
-		$model = \App\CarModel::whereName($model)
-		->whereMakeId($make->id)
-		->first();
-
+		$model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
 		if(!$model)
 			abort(404);
 
-		$c = \App\Company::whereHas('models', function($q) use($model){
-			$q->whereId($model->id);
-		})
-		->whereStatus(1)
-		->where('spec_id', $spec->id)
-		->take(6)
-		->get();
-
-		$companies = $this->gatherJSON($c);
-
-		$bread = ['spec' => $spec, 'make' => $make];
-
-		return view('pages.catalog.catalog-companies')
-			->with(compact('spec', 'make', 'bread', 'companies'));
-
+		return view('pages.catalog.catalog-companies', [
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpec($model, $spec, 6)),
+            'bread' => ['spec' => $spec, 'make' => $make],
+            'spec' => $spec,
+            'make' => $make,
+        ]);
 	}
 
 	public function nospecsModel($make, $model) {
 
-		$make = \App\Make::whereName($make)->first();
-
+		$make = $this->makesRepository->getFirstByName($make);
 		if(!$make)
 			abort(404);
-
-		$model = \App\CarModel::whereName($model)
-		->whereMakeId($make->id)
-		->first();
-
+		$model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
 		if(!$model)
 			abort(404);
-
-		$c = \App\Company::whereHas('models', function($q) use($model){
-			$q->whereId($model->id);
-		})
-		->whereStatus(1)
-		->take(6)
-		->get();
-
-		$companies = $this->gatherJSON($c);
-
-		$bread = ['nospecs' => $make];
-
-		return view('pages.catalog.catalog-companies')
-			->with('bread', $bread)
-			->with('make', $make)
-			->with('nospecs', true)
-			->with('companies', $companies);
-
+		return view('pages.catalog.catalog-companies', [
+            'bread' => ['nospecs' => $make],
+            'make' => $make,
+            'nospec' => true,
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModel($model)),
+        ]);
 	}
 
 }
