@@ -105,7 +105,14 @@ class FeedbackController extends Controller {
 	}
 
 	public function mention(Request $request) {
-		$f = \App\Feedback::findBySlug($request->route('id'));
+        $slug = $request->route('id');
+        if($slug === null)
+            $slug = $request->route('model');
+        if($slug === null)
+            $slug = $request->route('make');
+        if($slug === null)
+            $slug = $request->route('type');
+		$f = \App\Feedback::findBySlug($slug);
 
 		if($f->status != 1)
 			abort(404);
