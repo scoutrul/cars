@@ -114,10 +114,10 @@ class FeedbackController extends Controller {
             $slug = $request->route('type');
 		$f = \App\Feedback::findBySlug($slug);
 
-		if($f->status != 1)
-			abort(404);
 
-		if(!$f)
+        if(!$f)
+            abort(404);
+		if($f->status != 1)
 			abort(404);
         $id = $f->id;
 

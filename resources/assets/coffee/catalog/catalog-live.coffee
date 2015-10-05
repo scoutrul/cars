@@ -3,6 +3,7 @@ TypeList = require '../inc/TypeList'
 class MakeModel extends Backbone.Model
 	defaults:
 		id: 0
+		type: null
 
 class MakeCollection extends Backbone.Collection
 	model: MakeModel
@@ -106,8 +107,9 @@ class MainMakes extends MakeList
 		.done (makes) =>
 			@deps[i] = []
 			for make in makes
+				make.type = i
 				@deps[i].push make.id
-			# console.log makes
+#			console.log makes
 
 			@showIfActive i
 
@@ -140,3 +142,6 @@ specmakes = new SpecMakes
 	types: types
 
 types.click()
+
+$('#type').on 'change', ->
+	console.log $('.type_item--active')

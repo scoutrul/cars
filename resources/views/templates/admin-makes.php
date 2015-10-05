@@ -12,6 +12,15 @@
 
 	</div>
 
+
+    <div class="popup_field">
+
+        <div class="popup_label">Meta Title</div>
+
+        <input type="text" class="popup_input make-meta_title" value="{{meta_title}}">
+
+    </div>
+
 	<div class="popup_field">
 								
 		<div class="popup_label">Url</div>
@@ -31,6 +40,12 @@
 
 	</div>
 
+
+    <div class="popup_field">
+        <div class="popup_label">Описание</div>
+        <textarea class="ckeditor make-description">{{description}}</textarea>
+    </div>
+
 	<div class="popup_field">
 								
 		<div class="popup_label">Модели</div>
@@ -46,6 +61,7 @@
 				<tr style="position:relative">
 					<th style="width:30px">№</th>
 					<th>Имя</th>
+					<th>Описание</th>
 					<th>Url</th>
 					<th style="width:200px">Тип</th>
 					<th style="width:90px"></th>
@@ -58,10 +74,12 @@
 				data-id="{{id}}"
 				data-title="{{title}}"
 				data-url="{{url}}"
+                data-description="{{description}}"
 				data-type-id="{{type_id}}"
 				data-type-title="{{type_title}}">
 					<td>{{id}}</td>
 					<td>{{title}}</td>
+					<td>{{description}}</td>
 					<td>{{url}}</td>
 					<td>{{type_title}}</td>
 					<td>

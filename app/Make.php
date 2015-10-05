@@ -1,8 +1,13 @@
 <?php namespace App;
 
+use App\Models\IHasMetaTitleAndDescription;
+use App\Models\THasMetaDescription;
+use App\Models\THasMetaTitle;
 use \SleepingOwl\Models\SleepingOwlModel as Model;
 
-class Make extends Model {
+class Make extends Model implements IHasMetaTitleAndDescription{
+
+    use THasMetaDescription, THasMetaTitle;
 
 	protected $table = 'makes';
 

@@ -89,12 +89,12 @@ Route::group(['prefix' => 'catalog'], function(){
 		'uses' => 'CatalogController@index'
 	]);
 
-	get('make/{make}', [
+	get('make/{type}/{make}', [
 		'as' => 'catalog-nospecs',
 		'uses' => 'CatalogController@nospecs'
 	]);
 
-	get('make/{make}/{model}', [
+	get('make/{type}/{make}/{model}', [
 		'as' => 'catalog-nospecs-model',
 		'uses' => 'CatalogController@nospecsModel'
 	]);
@@ -104,12 +104,12 @@ Route::group(['prefix' => 'catalog'], function(){
 		'uses' => 'CatalogController@specs'
 	]);
 
-	get('{spec}/{make}', [
+	get('{spec}/{type}/{make}', [
 		'as' => 'make',
 		'uses' => 'CatalogController@withspecs'
 	]);
 
-	get('{spec}/{make}/{model}', [
+	get('{spec}/{type}/{make}/{model}', [
 		'as' => 'spec-make-model',
 		'uses' => 'CatalogController@withspecsModel'
 	]);
@@ -126,7 +126,7 @@ Route::group(['prefix' => 'article'], function(){
 
 	]);
 
-	get('/{type}/{make?}/{model?}/{id?}', [
+	get('/{type}/{make}/{model}/{id}', [
 
 		'as' => 'mention',
 		'uses' => 'FeedbackController@mention'

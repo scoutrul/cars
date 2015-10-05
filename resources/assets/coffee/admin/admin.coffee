@@ -39,6 +39,8 @@ class MakeView extends Backbone.View
 		src = @template
 			title: @model.get 'title'
 			url: @model.get 'url'
+			description: @model.get 'description'
+			meta_title: @model.get 'meta_title'
 			icon: if @model.get('icon') then "#{@home}/#{@model.get('icon')}" else "#{@home}/img/noavatar.png"
 			models: @models
 			buttonText: 'Принять изменения'
@@ -110,11 +112,12 @@ class MakeView extends Backbone.View
 		@models = []
 
 		@$el.find('.model').each (i, model) =>
-
 			@models.push
 				id: $(model).data 'id'
 				title: $(model).data 'title'
 				url: $(model).data 'url'
+				description: $(model).data 'description'
+				meta_title: $(model).data 'meta_title'
 				type_id: $(model).data 'type-id'
 				type_title: $(model).data 'type-title'
 
@@ -129,12 +132,19 @@ class MakeView extends Backbone.View
 		soviet = parseInt @popup.find('.make-soviet').val()
 		icon = @popup.find('.make-icon').css('background-image')
 		icon = icon.substring(4, icon.length - 1)
-
+		description = @popup.find('.make-description').val()
+		meta_title = @popup.find('.make-meta_title').val()
 		if title isnt @model.get 'title'
 			result.title = title
 
 		if url isnt @model.get 'url'
 			result.url = url
+
+		if description isnt @model.get 'description'
+			result.description = description
+
+		if meta_title isnt @model.get 'meta_title'
+			result.meta_title = meta_title
 
 		if soviet isnt parseInt @model.get 'soviet'
 			result.soviet = soviet
@@ -152,6 +162,8 @@ class MakeView extends Backbone.View
 				m.title = model.get 'title'
 				m.url = model.get 'url'
 				m.type = model.get 'type_id'
+				m.description = model.get 'description'
+				m.meta_title = model.get 'meta_title'
 
 				modelsArray.push m
 
@@ -174,6 +186,8 @@ class Make extends Backbone.Model
 	defaults:
 		id: ''
 		title: ''
+		description: ''
+		meta_title: ''
 		url: ''
 		show: true
 		soviet: 1
@@ -243,6 +257,8 @@ class Makes extends Backbone.View
 
 		title = @popup.find('.make-title').val()
 		url = @popup.find('.make-url').val()
+		description = @popup.find('.make-description').val()
+		meta_title = @popup.find('.make-meta_title').val()
 
 		if title isnt ''
 			result.title = title
@@ -251,6 +267,16 @@ class Makes extends Backbone.View
 
 		if url isnt ''
 			result.url = url
+		else
+			return
+
+		if description isnt ''
+			result.description = description
+		else
+			return
+
+		if meta_title isnt ''
+			result.meta_title = meta_title
 		else
 			return
 
@@ -265,6 +291,7 @@ class Makes extends Backbone.View
 				m.url = model.get 'url'
 				m.new = model.get 'new'
 				m.type = model.get 'type_id'
+				m.description = model.get 'description'
 
 				modelsArray.push m
 
@@ -292,6 +319,8 @@ class Makes extends Backbone.View
 				url: $(make).data 'url'
 				soviet: $(make).data 'soviet'
 				icon: $(make).data 'icon'
+				description: $(make).data 'description'
+				meta_title: $(make).data 'meta_title'
 
 			@collection.add m
 

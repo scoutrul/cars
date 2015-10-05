@@ -21,6 +21,8 @@ Admin::menu()->url('/')
 
 Admin::menu(\App\User::class);
 
+Admin::menu(\App\Spec::class);
+
 Admin::menu(\App\Company::class);
 
 Admin::menu(\App\Feedback::class);
@@ -32,3 +34,5 @@ Admin::menu(\App\Page::class);
 Admin::menu(\App\Comment::class);
 
 Admin::menu()->url('makes')->uses('App\Http\Controllers\AdminController@makes')->label('Марки и модели');
+
+Admin::menu(\App\CarModel::class);

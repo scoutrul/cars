@@ -29,7 +29,7 @@
 
 					@elseif(isset($nospecs))
 						
-						{{ $bread['nospecs']->title }}
+						{{--{{ $bread['nospecs']->title }}--}}
 
 					@else
 
@@ -40,24 +40,33 @@
 				</h3>
 
 				@if(isset($models))
+                    <div class="make-info">
+                        @if($make->icon)
+                            <img src="/{{$make->icon}}" width="32">
+                        @endif
+                        <span class="make-title">{{$make->title}}</span>
+                        <div class="make-description">{{$make->description}}</div>
+                    </div>
 					<div class="makes makes--catalog">
 					
 						<ul>	
 						
 							@foreach($models as $model)
-						
 								<li>
 									<span>
 										
 										@if(isset($nospecs))
-											<a href="{{ route('catalog-nospecs-model', 
-											['make' => $make->name, 
-											'model' => $model->name]) }}">
+											<a href="{{ route('catalog-nospecs-model',
+											['make' => $make->name,
+											'model' => $model->name,
+											'type' => $type->name,
+											]) }}">
 												{{ $model->title }}</a>
 										@else
 											<a href="{{ route('spec-make-model', 
 											['spec' => $spec->name, 
-											'make' => $make->name, 
+											'make' => $make->name,
+											'type' => $type->name,
 											'model' => $model->name]) }}">
 												{{ $model->title }}</a>
 										@endif

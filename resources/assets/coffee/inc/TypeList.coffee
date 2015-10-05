@@ -1,6 +1,7 @@
 class TypeModel extends Backbone.Model
 	defaults:
 		id: 0
+		name: null
 
 class TypesCollection extends Backbone.Collection
 	model: TypeModel
@@ -22,7 +23,7 @@ class TypeView extends Backbone.View
 		'click': 'changeState'
 
 	changeState: =>
-		if @state 
+		if @state
 			do @deactivate
 
 			@model.trigger('pass')
@@ -30,6 +31,10 @@ class TypeView extends Backbone.View
 			do @activate
 
 	activate: =>
+		$('#catalog-makes').find('a').each (i, element) =>
+			element.href = element.href.replace "/make/", "/make/"+@model.attributes.name+'/'
+		$('#catalog-specmakes').find('a').each (i, element) =>
+			element.href = element.href.replace /catalog\/(.*)\//, "catalog/$1"+@model.attributes.name+'/'
 		@model.trigger('activate', @model)
 
 		@$el.addClass @class
@@ -38,6 +43,11 @@ class TypeView extends Backbone.View
 
 	deactivate: =>
 		@$el.removeClass @class
+		$('#catalog-makes').find('a').each (i, element) =>
+			element.href = element.href.replace @model.attributes.name+'/', ""
+		$('#catalog-specmakes').find('a').each (i, element) =>
+			console.log element.href
+			element.href = element.href.replace @model.attributes.name, ""
 
 		@state = false
 
@@ -65,7 +75,8 @@ class TypeList extends Backbone.View
 		@$el.children('li').each (i, li) =>
 
 			id = $(li).data('id')
-			m = new TypeModel id: id
+			name = $(li).data('name')
+			m = new TypeModel id: id, name: name
 			v = new TypeView model: m, el: li
 			@collection.add m
 

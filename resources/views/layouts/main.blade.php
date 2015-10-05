@@ -4,7 +4,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Комтранс Клуб</title>
+        @include('inc.meta')
 		<link rel="stylesheet" href="{{ URL::to('/') }}/css/style.css">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:500,700italic,300,700,500italic,300italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ URL::to('/') }}/css/vendor/popup.css">

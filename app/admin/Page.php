@@ -16,10 +16,13 @@ Admin::model(App\Page::class)->title('Страницы')
 {
 
 	FormItem::text('title', 'Заголовок')->required();
+	FormItem::text('meta_title', 'Meta Заголовок');
 
 	FormItem::textAddon('url', 'Url')->unique()->addon('komtrans-club.ru/page/')->placement('before');
 
 	FormItem::select('in_header', 'В меню')->list( [0 => 'Нет', 1 => 'Да'] );
+
+    FormItem::text('description', 'Описание');
 
 	FormItem::ckeditor('content', 'Содержание')->required();
 

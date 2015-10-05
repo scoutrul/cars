@@ -5,7 +5,6 @@ Breadcrumbs::register('home', function($breadcrumbs)
 {
 	$breadcrumbs->push('Главная', route('home'));
 });
-
 // Home > Catalog
 Breadcrumbs::register('catalog', function($breadcrumbs, $c)
 {
@@ -15,7 +14,16 @@ Breadcrumbs::register('catalog', function($breadcrumbs, $c)
 
 // Home > Catalog > Make
 	if(isset($c['nospecs'])){
-		$breadcrumbs->push($c['nospecs']->title);
+        if(isset($c['type'])){
+            // Home > Catalog > Type > Make
+            $breadcrumbs->push($c['type']->title, route('catalog'));
+        }
+        if(isset($c['model'])){
+            $breadcrumbs->push($c['nospecs']->title, route('catalog-nospecs', ['make' => $c['nospecs']->name, 'type' => $c['type']->name]));
+            $breadcrumbs->push($c['model']->title);
+        } else {
+            $breadcrumbs->push($c['nospecs']->title);
+        }
 	}
 
 // Home > Catalog > Spec
@@ -25,9 +33,17 @@ Breadcrumbs::register('catalog', function($breadcrumbs, $c)
 
 // Home > Catalog > Spec > Make
 		if(isset($c['make'])) {
+            // Home > Catalog > Spec > Type > Make
+            if(isset($c['type'])){
+                $breadcrumbs->push($c['type']->title, route('specs', $c['spec']->name));
+            }
 
-			$breadcrumbs->push($c['make']->title);
-
+            if(isset($c['model'])){
+                $breadcrumbs->push($c['make']->title, route('make', ['make' => $c['make']->name, 'spec' => $c['spec']->name, 'type' => $c['type']->name]));
+                $breadcrumbs->push($c['model']->title);
+            } else {
+                $breadcrumbs->push($c['make']->title);
+            }
 		}
 
 	}

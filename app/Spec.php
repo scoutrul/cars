@@ -1,12 +1,17 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\IHasMetaTitleAndDescription;
+use App\Models\THasMetaDescription;
+use App\Models\THasMetaTitle;
+use \SleepingOwl\Models\SleepingOwlModel as Model;
 
-class Spec extends Model {
+class Spec extends Model implements IHasMetaTitleAndDescription{
+
+    use THasMetaDescription, THasMetaTitle;
 
 	protected $table = 'specs';
 
-	protected $fillable = ['title', 'name'];
+	protected $fillable = ['title', 'name', 'description'];
 
 	public function companies() {
 		return $this->hasMany('App\Company', 'spec_id');

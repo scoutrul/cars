@@ -27,7 +27,7 @@ class CarModelRepository extends AbstractRepository{
 
     public function getFirstByNameAndMake($name, $make)
     {
-        return $this->modelClass->where('make_id', $make->id)->where('name', $name)->get();
+        return $this->modelClass->where('make_id', $make->id)->where('name', $name)->first();
     }
 
 
