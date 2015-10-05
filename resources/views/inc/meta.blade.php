@@ -1,6 +1,6 @@
 <?php
     $crumb = '';
-    if(isset($bread)){
+    if(isset($bread) && is_array($bread)){
         foreach($bread as $b){
             if(isset($b->title))
                 $crumb .= $b->title .'|';
