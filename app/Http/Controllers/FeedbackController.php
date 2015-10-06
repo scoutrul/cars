@@ -65,12 +65,12 @@ class FeedbackController extends Controller {
 			abort(404);
 		}
 
-		$models = \App\CarModel::where('make_id', '=', $m->id)
+		$models = \App\CarModel::where('make_id', '=', $m->id)->where('type_id', $t->id)
 		->has('feedbacks')
 		->with('feedbacks')
 		->get();
 
-		$feeds = \App\Feedback::where('make_id', '=', $m->id)
+		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)
 		->with('user')
 		->with('likes')
 		->with('dislikes')
