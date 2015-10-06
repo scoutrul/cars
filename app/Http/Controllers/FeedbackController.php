@@ -76,7 +76,7 @@ class FeedbackController extends Controller {
             $modelIds[] = $model->id;
         }
 
-		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)->whereRaw('model_id IN '.implode(',', $modelIds))
+		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)->whereRaw('model_id IN('.implode(',', $modelIds).')')
 		->with('user')
 		->with('likes')
 		->with('dislikes')
