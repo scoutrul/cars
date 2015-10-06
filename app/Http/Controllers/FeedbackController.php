@@ -66,11 +66,17 @@ class FeedbackController extends Controller {
 		}
 
 		$models = \App\CarModel::where('make_id', '=', $m->id)->where('type_id', $t->id)
-		->has('feedbacks')
+		->whereHas('feedbacks', function($q){
+            $q->where('status', 1);
+        })
 		->with('feedbacks')
 		->get();
+        $modelIds = [];
+        foreach($models as $model){
+            $modelIds[] = $model->id;
+        }
 
-		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)
+		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)->whereRaw('model_id IN '.implode(',', $modelIds))
 		->with('user')
 		->with('likes')
 		->with('dislikes')
