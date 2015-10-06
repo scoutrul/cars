@@ -31,6 +31,7 @@
 					
 					@include('inc.feedback')
 
+                    @include('inc.last_reviews')
 				</div>
 
 			</div>

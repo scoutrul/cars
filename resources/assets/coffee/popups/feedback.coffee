@@ -10,6 +10,7 @@ $('#feedback').magnificPopup
 model = new SelectView 
 	el: '#feedback-model'
 	url: 'api/get-models-by-make'
+	type: 0
 
 make = new SelectView 
 	el: '#feedback-make'
@@ -106,7 +107,9 @@ class List extends Backbone.View
 
 	render: ->
 		@collection.each (item) =>
-			v = new ListView 
+#			console.log item
+#			console.log @options.class
+			v = new ListView
 				model: item
 				className : @options.class
 

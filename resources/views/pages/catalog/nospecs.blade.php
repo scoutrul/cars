@@ -3,8 +3,9 @@
 @section('catalog')
 
 	<h3 class="catalog_type">Каталог</h3>
-
-	@include('inc.type', ['id' => 'catalog-types'])
+    @if(!isset($no_type) || $no_type === false)
+	    @include('inc.type', ['id' => 'catalog-types'])
+    @endif
 
 	@include('inc.makes.makes', ['id' => 'catalog-makes'])
 

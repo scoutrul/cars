@@ -11,7 +11,7 @@ class Spec extends Model implements IHasMetaTitleAndDescription{
 
 	protected $table = 'specs';
 
-	protected $fillable = ['title', 'name', 'description'];
+	protected $fillable = ['title', 'name', 'description', 'meta_title'];
 
 	public function companies() {
 		return $this->hasMany('App\Company', 'spec_id');

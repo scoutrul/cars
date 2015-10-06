@@ -10,6 +10,7 @@ class SelectView extends Backbone.View
 
 	selected: ->
 		do @options.c.reset if @options.c
+		@options.c.options.parent  = @ if @options.c
 		@options.c.store @$el.val() if @options.c
 
 	reset: ->
@@ -42,10 +43,15 @@ class SelectView extends Backbone.View
 			data:
 				id: id
 		.done (d) ->
+			if(typeof self.options.type isnt "undefined")
+				console.log d
+				type = self.options.parent.options.parent.$el.val()
+				pos = 0
+				for i in d
+					if parseInt i.type != parseInt type
+						d.splice(pos, 1);
+					pos++
 			self.options.json = d
-
-			console.log d
-
 			do self.render
 
 	get: ->

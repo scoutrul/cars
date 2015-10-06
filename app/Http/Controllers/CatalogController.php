@@ -79,7 +79,7 @@ class CatalogController extends Controller {
 		$make = $this->makesRepository->getFirstByName($make);
 		if(!$make)
 			abort(404);
-		$models = $this->carModelRepository->getByMakeWithCompanies($make);
+		$models = $this->carModelRepository->getByMakeWithCompanies($make, $type);
 		return view('pages.catalog.catalog-companies', [
             'spec' => $spec,
             'models' => $models,
@@ -92,7 +92,41 @@ class CatalogController extends Controller {
         ]);
 	}
 
-	public function nospecs($type, $make) {
+    public function nospecsType($type)
+    {
+        $type = $this->typeRepository->getFirstByName($type);
+        if(!$type)
+            abort(404);
+        return view('pages.catalog.nospecs')
+            ->with('makes', $this->makesRepository->getForCatalogByType($type))
+            ->with('no_type', true)
+            ->with('bread', ['type' => $type]);
+    }
+
+
+    public function specsType($spec, $type)
+    {
+        $type = $this->typeRepository->getFirstByName($type);
+        $spec = $this->specsRepository->getFirstByName($spec);
+        if(!$type)
+            abort(404);
+        if(!$spec)
+            abort(404);
+        return view('pages.catalog.withspecs', [
+            'makes' => $this->makesRepository->getForCatalogBySpecAndType($type, $spec),
+            'no_type' => true,
+            'spec' => $spec,
+            'meta_title' => $spec->meta_title ? $spec->meta_title : null,
+            'meta_description' => $spec->description ? $spec->description: null,
+            'bread' => ['spec' => $spec, 'type' => $type]
+        ]);
+//            ->with('makes', $this->makesRepository->getForCatalogByType($type))
+//            ->with('no_type', true)
+//            ->with('bread', ['type' => $type]);
+    }
+
+	public function nospecs($type, $make)
+    {
 
 		$make = $this->makesRepository->getFirstByName($make);
         $type = $this->typeRepository->getFirstByName($type);
@@ -104,13 +138,46 @@ class CatalogController extends Controller {
             'bread' => ['type' => $type,'nospecs' => $make],
             'make' => $make,
             'type' => $type,
-            'models' => $this->carModelRepository->getByMakeWithCompanies($make),
+            'models' => $this->carModelRepository->getByMakeWithCompanies($make, $type),
             'nospecs' => true,
             'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMake($make, 6)),
             'meta_title'=> $make->meta_title ? $make->meta_title : null,
             'meta_description'=> $make->description ? $make->description : null,
         ]);
 	}
+
+    public function nospecsNoType($make)
+    {
+
+        $make = $this->makesRepository->getFirstByName($make);
+        if(!$make)
+            abort(404);
+        return view('pages.catalog.catalog-companies', [
+            'bread' => ['nospecs' => $make],
+            'make' => $make,
+            'models' => $this->carModelRepository->getByMakeWithCompanies($make),
+            'nospecs' => true,
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMake($make, 6)),
+            'meta_title'=> $make->meta_title ? $make->meta_title : null,
+            'meta_description'=> $make->description ? $make->description : null,
+        ]);
+    }
+
+    public function makeNoType($make)
+    {
+        $make = $this->makesRepository->getFirstByName($make);
+        if(!$make)
+            abort(404);
+        return view('pages.catalog.catalog-companies', [
+            'bread' => ['nospecs' => $make],
+            'make' => $make,
+            'models' => $this->carModelRepository->getByMakeWithCompanies($make),
+            'nospecs' => true,
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMake($make, 6)),
+            'meta_title'=> $make->meta_title ? $make->meta_title : null,
+            'meta_description'=> $make->description ? $make->description : null,
+        ]);
+    }
 
 	public function withspecsModel($spec, $type, $make, $model) {
 
@@ -133,10 +200,34 @@ class CatalogController extends Controller {
             'spec' => $spec,
             'type' => $type,
             'make' => $make,
+            'model' => $model,
             'meta_title'=> $model->meta_title ? $model->meta_title : null,
             'meta_description'=> $model->description ? $model->description : null,
         ]);
 	}
+
+    public function withspecsModelNoType($spec, $make, $model) {
+
+        $spec = $this->specsRepository->getFirstByName($spec);
+        if(!$spec)
+            abort(404);
+        $make = $this->makesRepository->getFirstByName($make);
+        if(!$make)
+            abort(404);
+        $model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
+        if(!$model)
+            abort(404);
+
+        return view('pages.catalog.catalog-companies', [
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpec($model, $spec, 6)),
+            'bread' => ['spec' => $spec, 'make' => $make, 'model' => $model],
+            'spec' => $spec,
+            'make' => $make,
+            'model' => $model,
+            'meta_title'=> $model->meta_title ? $model->meta_title : null,
+            'meta_description'=> $model->description ? $model->description : null,
+        ]);
+    }
 
 	public function nospecsModel($type, $make, $model) {
 
@@ -152,6 +243,7 @@ class CatalogController extends Controller {
 		return view('pages.catalog.catalog-companies', [
             'bread' => ['nospecs' => $make, 'type' => $type, 'model' => $model],
             'make' => $make,
+            'model' => $model,
             'nospec' => true,
             'type' => $type,
             'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModel($model)),
@@ -159,5 +251,24 @@ class CatalogController extends Controller {
             'meta_description'=> $model->description ? $model->description : null,
         ]);
 	}
+
+    public function nospecsModelNoType($make, $model) {
+
+        $make = $this->makesRepository->getFirstByName($make);
+        if(!$make)
+            abort(404);
+        $model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
+        if(!$model)
+            abort(404);
+        return view('pages.catalog.catalog-companies', [
+            'bread' => ['nospecs' => $make, 'model' => $model],
+            'make' => $make,
+            'model' => $model,
+            'nospec' => true,
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModel($model)),
+            'meta_title'=> $model->meta_title ? $model->meta_title : null,
+            'meta_description'=> $model->description ? $model->description : null,
+        ]);
+    }
 
 }

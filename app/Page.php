@@ -11,6 +11,6 @@ class Page extends Model implements IHasMetaTitleAndDescription{
 
 	protected $table = 'pages';
 
-	protected $fillable = ['title', 'url', 'content', 'in_header'];
+	protected $fillable = ['title', 'url', 'content', 'in_header', 'description', 'meta_title'];
 
 }

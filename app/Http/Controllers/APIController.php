@@ -76,7 +76,6 @@ class APIController extends Controller {
 	public function models_by_make() {
 
 		$id = \Input::get('id');
-
 		$m = \App\CarModel::where('make_id', $id)
 		->select('id', 'title')->get();
 

@@ -24,20 +24,31 @@
 
 		<ul>
 			@foreach($soviet as $make)
-				
-					<li data-id="{{ $make->id }}">
+
+                <li data-id="{{ $make->id }}">
+
 						<span>
 							<span class="makes_icon" style="background-image:url({{ route('home') . '/' . $make->icon }})"></span>
 
-							@if($id == 'catalog-makes')
-								<a href="{{ route('catalog-nospecs', $make->name) }}">{{ $make->title }}</a>
-							@else
-								<a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name]) }}">
-									{{ $make->title }}
-								</a>
-							@endif
+                            @if($id == 'catalog-makes')
+                                @if(isset($no_type))
+                                    <a href="{{ route('catalog-nospecs', ['make' => $make->name, 'type' => $bread['type']->name]) }}">{{ $make->title }}</a>
+                                @else
+                                    <a href="{{ route('catalog-nospecs', $make->name) }}">{{ $make->title }}</a>
+                                @endif
+                            @else
+                                @if(isset($no_type))
+                                    <a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name, 'type' => $bread['type']->name]) }}">
+                                        {{ $make->title }}
+                                    </a>
+                                @else
+                                    <a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name]) }}">
+                                        {{ $make->title }}
+                                    </a>
+                                @endif
+                            @endif
 						</span>
-					</li>
+                </li>
 			
 			@endforeach
 		</ul>
@@ -53,9 +64,16 @@
 							@if($id == 'catalog-makes')
 								<a href="{{ route('catalog-nospecs', $make->name) }}">{{ $make->title }}</a>
 							@else
-								<a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name]) }}">
-									{{ $make->title }}
-								</a>
+                                @if(isset($no_type))
+                                    {{dd(route('make', ['spec' => $spec->name, 'make' => $make->name, 'type' => $bread['type']->name]))}}
+                                    <a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name, 'type' => $bread['type']->name]) }}">
+                                        {{ $make->title }}
+                                    </a>
+                                @else
+                                    <a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name]) }}">
+                                        {{ $make->title }}
+                                    </a>
+                                @endif
 							@endif
 						</span>
 					</li>

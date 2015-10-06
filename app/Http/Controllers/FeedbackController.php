@@ -28,6 +28,29 @@ class FeedbackController extends Controller {
 
 	}
 
+
+    public function by_type($type)
+    {
+        $type = \App\Type::whereName($type)->first();
+
+        if(!$type)
+            abort(404);
+        $makes = \App\Make::whereHas('feedbacks', function($q){
+            $q->whereStatus(1);
+        })
+            ->whereHas('models', function($q) use($type){
+                $q->has('feedbacks');
+                $q->whereTypeId($type->id);
+            })
+            ->get();
+
+        $type->makes = $makes;
+        return view('parts.feed.main')
+            ->with('bread', ['type' => $type])
+            ->with('types', [$type]);
+
+    }
+
 	public function by_make($type, $make) {
 
 		$t = \App\Type::whereName($type)->first();

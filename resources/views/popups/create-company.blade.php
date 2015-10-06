@@ -77,7 +77,7 @@
 						placeholder="ООО 'Комтранс'">
 					
 					</div>
-					
+
 					<div class="popup_field">
 							
 						<div class="popup_label">Адрес</div>
@@ -98,6 +98,21 @@
 				</div>
 
 				<div>
+
+                        <div class="popup_field">
+                            <div class="popup_label">Форма собственности</div>
+                            <select name="" id="create-company-ctype" class="popup_select create-company">
+                                <option value="" disabled selected></option>
+                                <option value="0" class="popup_option">ИП</option>
+                                <option value="1" class="popup_option">ЧП</option>
+                                <option value="2" class="popup_option">ООО</option>
+                                <option value="3" class="popup_option">ОАО</option>
+                                <option value="4" class="popup_option">ЗАО</option>
+                                <option value="5" class="popup_option">Другое</option>
+                            </select>
+
+                        </div>
+                    
 					<div class="popup_field">
 					
 						<div class="popup_label">Кратко о компании</div>
