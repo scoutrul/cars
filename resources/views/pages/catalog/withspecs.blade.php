@@ -2,7 +2,7 @@
 
 @section('catalog')
 
-	<h3 class="catalog_type">{{ $spec->title }}</h3>
+	<h1 class="catalog_type">{{ $spec->title }}</h1>
     @if(!isset($no_type) || $no_type === false)
 	    @include('inc.type', ['id' => 'catalog-types'])
     @endif
