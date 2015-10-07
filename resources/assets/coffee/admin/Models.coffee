@@ -34,7 +34,7 @@ class ModelView extends Backbone.View
 		@editButton.click @toggleEdit
 
 		@title = @$el.children('td:eq(1)')
-		@description = @$el.children('td:eq(2)')
+#		@description = @$el.children('td:eq(2)')
 		@url = @$el.children('td:eq(3)')
 		@type = @$el.children('td:eq(4)')
 
@@ -74,11 +74,11 @@ class ModelView extends Backbone.View
 	edit: =>
 
 		@titleInput = $("<input value='#{@model.get('title')}'>")
-		@descriptionInput = $("<input value='#{@model.get('description')}'>")
+#		@descriptionInput = $("<input value='#{@model.get('description')}'>")
 		@urlInput = $("<input value='#{@model.get('url')}'>")
 
 		@title.html @titleInput
-		@description.html @descriptionInput
+#		@description.html @descriptionInput
 		@url.html @urlInput
 
 		@titleInput.focus()
@@ -101,16 +101,16 @@ class ModelView extends Backbone.View
 	hideInputs: ->
 		
 		@title.html @model.get 'title'
-		@description.html @model.get 'description'
+#		@description.html @model.get 'description'
 		@url.html @model.get 'url'
 		@type.html @model.get 'type_title'
 
 	saveChanges: =>
 
-		if @titleInput.val() isnt (@model.get('title') + '') or @urlInput.val() isnt (@model.get('url') + '') or @descriptionInput.val() isnt (@model.get('description') + '')
+		if @titleInput.val() isnt (@model.get('title') + '') or @urlInput.val() isnt (@model.get('url') + '')### or @descriptionInput.val() isnt (@model.get('description') + '')###
 			if @titleInput.val() isnt '' and @urlInput.val() isnt ''
 				@model.set('title', @titleInput.val())
-				@model.set('description', @descriptionInput.val())
+#				@model.set('description', @descriptionInput.val())
 				@model.set('url', @urlInput.val())
 				@model.set('changed', true)
 
@@ -186,7 +186,7 @@ class Models extends Backbone.View
 			m = new Model
 				id: $(model).data 'id'
 				title: $(model).data 'title'
-				description: $(model).data 'description'
+#				description: $(model).data 'description'
 				url: $(model).data 'url'
 				type_id: $(model).data 'type-id'
 				type_title: $(model).data 'type-title'

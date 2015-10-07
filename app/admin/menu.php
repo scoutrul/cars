@@ -19,6 +19,8 @@ Admin::menu()->url('/')
 ->label('Главная')->icon('fa-dashboard')
 ->uses('\App\Http\Controllers\AdminController@index');
 
+Admin::menu(\App\Meta::class);
+
 Admin::menu(\App\User::class);
 
 Admin::menu(\App\Spec::class);

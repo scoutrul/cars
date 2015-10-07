@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Meta;
+
 class HomeController extends Controller {
 
 	public function index() {
@@ -38,9 +40,18 @@ class HomeController extends Controller {
 
 		}
 
-		return view('pages.home')
-		->with('ids', $ids)
-		->with('makes', $makes);
+        $view = view('pages.home')
+            ->with('ids', $ids)
+            ->with('makes', $makes);
+
+        $meta = Meta::where('name', 'index');
+        if($meta->count() > 0){
+            $meta = $meta->first();
+            $meta_title = $meta->meta_title;
+            $description = $meta->description;
+            $view->with('meta_title', $meta_title)->with('meta_description', $description);
+        }
+		return $view;
 
 	}
 
