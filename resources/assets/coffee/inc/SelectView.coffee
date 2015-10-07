@@ -49,7 +49,7 @@ class SelectView extends Backbone.View
 					if typeof i is "undefined"
 						d.splice(key, 1)
 						continue
-					if(parseInt(i.type_id, 10) != parseInt(type, 10))
+					if(parseInt(i.type_id) isnt parseInt(type))
 						console.log "splicing: ", i
 						d.splice(key, 1);
 			console.log d
