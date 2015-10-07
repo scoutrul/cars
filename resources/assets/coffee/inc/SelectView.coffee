@@ -43,6 +43,7 @@ class SelectView extends Backbone.View
 			data:
 				id: id
 		.done (d) ->
+			console.log d
 			if(typeof self.options.type isnt "undefined")
 				type = self.options.parent.options.parent.$el.val()
 				for i, key in d
