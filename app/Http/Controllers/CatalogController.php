@@ -86,7 +86,7 @@ class CatalogController extends Controller {
             'make' => $make,
             'bread' => ['spec' => $spec, 'type' => $type, 'make' => $make],
             'type' => $type,
-            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMakeAndSpec($make, $spec, 6)),
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMakeAndSpecType($make, $spec, $type, 6)),
             'meta_title'=> $make->meta_title ? $make->meta_title : null,
             'meta_description'=> $make->description ? $make->description : null,
         ]);
@@ -140,7 +140,7 @@ class CatalogController extends Controller {
             'type' => $type,
             'models' => $this->carModelRepository->getByMakeWithCompanies($make, $type),
             'nospecs' => true,
-            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMake($make, 6)),
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByMakeAndType($make, $type, 6)),
             'meta_title'=> $make->meta_title ? $make->meta_title : null,
             'meta_description'=> $make->description ? $make->description : null,
         ]);
@@ -195,7 +195,7 @@ class CatalogController extends Controller {
 			abort(404);
 
 		return view('pages.catalog.catalog-companies', [
-            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpec($model, $spec, 6)),
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpecType($model, $spec, $type, 6)),
             'bread' => ['spec' => $spec, 'make' => $make, 'type' => $type, 'model' => $model],
             'spec' => $spec,
             'type' => $type,
@@ -246,7 +246,7 @@ class CatalogController extends Controller {
             'model' => $model,
             'nospec' => true,
             'type' => $type,
-            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModel($model)),
+            'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndType($model, $type)),
             'meta_title'=> $model->meta_title ? $model->meta_title : null,
             'meta_description'=> $model->description ? $model->description : null,
         ]);
