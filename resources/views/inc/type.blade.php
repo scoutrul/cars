@@ -5,8 +5,7 @@
 	<ul id="types">
 
 		@foreach($types as $type)
-
-			<li class="type_item" data-id="{{ $type->id }}">
+			<li class="type_item" data-id="{{ $type->id }}" data-name="{{$type->name}}">
 				<div>
 					{!! $type->icon !!}
 				</div>

@@ -29,7 +29,6 @@ class CurrentSpecsComposer {
             $this->current = $data['current'];
         else
             $this->current = false;
-
         $view->with('specs', $this->specs)->with('current', $this->current);
     }
 

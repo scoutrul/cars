@@ -20,14 +20,20 @@ class CarModelRepository extends AbstractRepository{
         return new CarModel();
     }
 
-    public function getByMakeWithCompanies(Make $make)
+    public function getByMakeWithCompanies(Make $make, $type = null)
     {
-        return $this->modelClass->where('make_id', $make->id)->has('companies')->get();
+        $modelQuery = $this->modelClass->where('make_id', $make->id)->has('companies');
+        if($type !== null)
+            $modelQuery->where('type_id', $type->id);
+        $modelQuery->whereHas('companies', function($q){
+            $q->whereStatus(1);
+        });
+        return $modelQuery->get();
     }
 
     public function getFirstByNameAndMake($name, $make)
     {
-        return $this->modelClass->where('make_id', $make->id)->where('name', $name)->get();
+        return $this->modelClass->where('make_id', $make->id)->where('name', $name)->first();
     }
 
 

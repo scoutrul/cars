@@ -29,6 +29,8 @@
 			data-title="{{ $make->title }}"
 			data-url="{{ $make->name }}"
 			data-soviet="{{ $make->soviet }}"
+			data-description="{{ $make->description }}"
+			data-meta_title="{{ $make->meta_title }}"
 			data-icon="{{ $make->icon }}">
 			<td>{{ $make->id }}</td>
 			<td>{{ $make->title }}</td>
@@ -43,6 +45,7 @@
 							data-id="{{ $model->id }}"
 							data-title="{{ $model->title }}"
 							data-url="{{ $model->name }}"
+							data-description="{{ $model->description }}"
 							data-type-id="{{ $model->type->id }}"
 							data-type-title="{{ $model->type->title }}">
 								<td>{{ $model->title }}</td>
@@ -92,3 +95,4 @@
 <script src="{{ URL::to('/') }}/js/vendor/selectbox.js"></script>
 <script src="{{ URL::to('/') }}/js/vendor/popup.js"></script>
 <script src="{{ URL::to('/') }}/js/admin.js"></script>
+<script src="{{ URL::to('/') }}/packages/sleeping-owl/admin/ckeditor/ckeditor.js"></script>

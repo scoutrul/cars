@@ -28,6 +28,29 @@ class FeedbackController extends Controller {
 
 	}
 
+
+    public function by_type($type)
+    {
+        $type = \App\Type::whereName($type)->first();
+
+        if(!$type)
+            abort(404);
+        $makes = \App\Make::whereHas('feedbacks', function($q){
+            $q->whereStatus(1);
+        })
+            ->whereHas('models', function($q) use($type){
+                $q->has('feedbacks');
+                $q->whereTypeId($type->id);
+            })
+            ->get();
+
+        $type->makes = $makes;
+        return view('parts.feed.main')
+            ->with('bread', ['type' => $type])
+            ->with('types', [$type]);
+
+    }
+
 	public function by_make($type, $make) {
 
 		$t = \App\Type::whereName($type)->first();
@@ -42,12 +65,18 @@ class FeedbackController extends Controller {
 			abort(404);
 		}
 
-		$models = \App\CarModel::where('make_id', '=', $m->id)
-		->has('feedbacks')
+		$models = \App\CarModel::where('make_id', '=', $m->id)->where('type_id', $t->id)
+		->whereHas('feedbacks', function($q){
+            $q->where('status', 1);
+        })
 		->with('feedbacks')
 		->get();
+        $modelIds = [];
+        foreach($models as $model){
+            $modelIds[] = $model->id;
+        }
 
-		$feeds = \App\Feedback::where('make_id', '=', $m->id)
+		$feeds = \App\Feedback::where('make_id', '=', $m->id)->where('type_id', $t->id)->whereRaw('model_id IN('.implode(',', $modelIds).')')
 		->with('user')
 		->with('likes')
 		->with('dislikes')
@@ -105,12 +134,19 @@ class FeedbackController extends Controller {
 	}
 
 	public function mention(Request $request) {
-		$f = \App\Feedback::findBySlug($request->route('id'));
+        $slug = $request->route('id');
+        if($slug === null)
+            $slug = $request->route('model');
+        if($slug === null)
+            $slug = $request->route('make');
+        if($slug === null)
+            $slug = $request->route('type');
+		$f = \App\Feedback::findBySlug($slug);
 
+
+        if(!$f)
+            abort(404);
 		if($f->status != 1)
-			abort(404);
-
-		if(!$f)
 			abort(404);
         $id = $f->id;
 

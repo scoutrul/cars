@@ -91,7 +91,9 @@ class AdminController extends Controller {
 		$title = \Input::get('title');
 		$url = \Input::get('url');
 		$soviet = \Input::get('soviet');
+        $description = \Input::get('description');
 		$icon = \Input::get('icon');
+        $metaTitle = \Input::get('meta_title');
 
 		$models = \Input::get('models');
 
@@ -102,6 +104,12 @@ class AdminController extends Controller {
 
 		if($url)
 			$make->name = $url;
+
+        if($description)
+            $make->description = $description;
+
+        if($metaTitle)
+            $make->meta_title = $metaTitle;
 
 		if($icon) {
 
@@ -131,14 +139,13 @@ class AdminController extends Controller {
 			$make->soviet = intval($soviet);
 
 		$make->save();
-
 		if($models) {
 
 			foreach($models as $m) {
 
 				$mo = (object)$m;
 
-				if($mo->new) {
+				if(isset($mo->new) && $mo->new) {
 
 					$model = new \App\CarModel;
 
@@ -146,6 +153,7 @@ class AdminController extends Controller {
 					$model->name = $mo->url;
 					$model->type_id = $mo->type;
 					$model->make_id = $make->id;
+                    $model->description = $mo->description;
 
 				} else {
 
@@ -154,6 +162,7 @@ class AdminController extends Controller {
 					$model->title = $mo->title;
 					$model->name = $mo->url;
 					$model->type_id = $mo->type;
+                    $model->description = $mo->description;
 
 				}
 

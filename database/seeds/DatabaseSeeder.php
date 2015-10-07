@@ -121,7 +121,7 @@ class TypeSeeder extends Seeder {
 
 		$types2 = [
 			'trucks', 'bus',
-			'light-trucks', 'trailers'
+			'light', 'trailers'
 		];
 
 		$icons = [

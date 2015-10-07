@@ -87,6 +87,7 @@ class ModelsList extends Backbone.View
 
 		@typeId = @options.typeId
 
+
 		do @getModels
 
 		do @render
@@ -154,10 +155,13 @@ class ModelsList extends Backbone.View
 
 	# add models to @modelsCollection
 	getModels: ->
+		console.log "#{@home}/#{@url}", @typeId
 		$.ajax "#{@home}/#{@url}",
 			data:
 				id: @typeId
 		.done (d) =>
+			console.log "real type", @options.realTypeId
+			d = (item for item in d when (typeof item isnt "undefined") && (parseInt(item.type_id) is parseInt(@options.realTypeId)))
 			@modelsCollection.add d
 
 	destroy: =>

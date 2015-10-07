@@ -89,30 +89,66 @@ Route::group(['prefix' => 'catalog'], function(){
 		'uses' => 'CatalogController@index'
 	]);
 
-	get('make/{make}', [
+    get('{type}', [
+        'as' => 'catalog-nospec-type',
+        'uses' => 'CatalogController@nospecsType'
+    ]);
+
+    get('make/{make}', [
+        'uses' => 'CatalogController@makeNoType'
+    ]);
+
+    get('make/all-types/{make}', [
+        'as' => 'catalog-nospecs-no-type',
+        'uses' => 'CatalogController@nospecsNoType'
+    ]);
+
+	get('make/{type}/{make}', [
 		'as' => 'catalog-nospecs',
 		'uses' => 'CatalogController@nospecs'
 	]);
 
-	get('make/{make}/{model}', [
-		'as' => 'catalog-nospecs-model',
+    get('make/all-types/{make}/{model}', [
+        'as' => 'catalog-nospecs-model',
+        'uses' => 'CatalogController@nospecsModelNoType'
+    ]);
+
+	get('make/{type}/{make}/{model}', [
+		'as' => 'catalog-nospecs-model-type',
 		'uses' => 'CatalogController@nospecsModel'
 	]);
 
-	get('{spec}', [
+	get('spec/{spec}', [
 		'as' => 'specs',
 		'uses' => 'CatalogController@specs'
 	]);
 
-	get('{spec}/{make}', [
+    get('spec/{spec}/{type}', [
+        'as' => 'specs-type',
+        'uses' => 'CatalogController@specsType'
+    ]);
+
+    get('spec/{spec}/all-types/{make}', [
+        'as' => 'make-no-type',
+        'uses' => 'CatalogController@withspecsNoType'
+    ]);
+
+	get('spec/{spec}/{type}/{make}', [
 		'as' => 'make',
 		'uses' => 'CatalogController@withspecs'
 	]);
 
-	get('{spec}/{make}/{model}', [
-		'as' => 'spec-make-model',
+    get('spec/{spec}/all-types/{make}/{model}', [
+        'as' => 'spec-make-model',
+        'uses' => 'CatalogController@withspecsModelNoType'
+    ]);
+
+	get('spec/{spec}/{type}/{make}/{model}', [
+		'as' => 'spec-make-model-type',
 		'uses' => 'CatalogController@withspecsModel'
 	]);
+
+
 
 
 });
@@ -132,6 +168,11 @@ Route::group(['prefix' => 'article'], function(){
 		'uses' => 'FeedbackController@mention'
 
 	])->where('id', '[a-z+-]+');
+
+    get('{type}', [
+        'as' => 'feedback-type',
+        'uses' => 'FeedbackController@by_type'
+    ])->where(['type' => '[a-z+-]+']);
 
 	get('{type}/{make}', [
 

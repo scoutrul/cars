@@ -36,6 +36,7 @@ class MakesList extends Backbone.View
 		@modelslist = new ModelsList
 			el: @$el.children('.create-company_models')
 			typeId: parseInt @select.val()
+			realTypeId: parseInt $('#create-company-type').val()
 
 	selectChanged: (e) =>
 		@modelslist.update parseInt e.target.value

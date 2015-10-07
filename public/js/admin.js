@@ -74,8 +74,9 @@ ModelView = (function(superClass) {
     this.removeButton.click(this.removeModel);
     this.editButton.click(this.toggleEdit);
     this.title = this.$el.children('td:eq(1)');
-    this.url = this.$el.children('td:eq(2)');
-    this.type = this.$el.children('td:eq(3)');
+    this.description = this.$el.children('td:eq(2)');
+    this.url = this.$el.children('td:eq(3)');
+    this.type = this.$el.children('td:eq(4)');
     return this.$el.append(this.saveButton);
   };
 
@@ -115,8 +116,10 @@ ModelView = (function(superClass) {
 
   ModelView.prototype.edit = function() {
     this.titleInput = $("<input value='" + (this.model.get('title')) + "'>");
+    this.descriptionInput = $("<input value='" + (this.model.get('description')) + "'>");
     this.urlInput = $("<input value='" + (this.model.get('url')) + "'>");
     this.title.html(this.titleInput);
+    this.description.html(this.descriptionInput);
     this.url.html(this.urlInput);
     this.titleInput.focus();
     return this.showTypeSelect();
@@ -140,14 +143,16 @@ ModelView = (function(superClass) {
 
   ModelView.prototype.hideInputs = function() {
     this.title.html(this.model.get('title'));
+    this.description.html(this.model.get('description'));
     this.url.html(this.model.get('url'));
     return this.type.html(this.model.get('type_title'));
   };
 
   ModelView.prototype.saveChanges = function() {
-    if (this.titleInput.val() !== (this.model.get('title') + '') || this.urlInput.val() !== (this.model.get('url') + '')) {
+    if (this.titleInput.val() !== (this.model.get('title') + '') || this.urlInput.val() !== (this.model.get('url') + '') || this.descriptionInput.val() !== (this.model.get('description') + '')) {
       if (this.titleInput.val() !== '' && this.urlInput.val() !== '') {
         this.model.set('title', this.titleInput.val());
+        this.model.set('description', this.descriptionInput.val());
         this.model.set('url', this.urlInput.val());
         this.model.set('changed', true);
       }
@@ -174,6 +179,7 @@ ModelView = (function(superClass) {
 
   ModelView.prototype.render = function() {
     this.$el.append("<td>" + (this.model.get('id')) + "</td>");
+    this.$el.append('<td></td>');
     this.$el.append('<td></td>');
     this.$el.append('<td></td>');
     this.$el.append('<td></td>');
@@ -222,6 +228,7 @@ Models = (function(superClass) {
         m = new Model({
           id: $(model).data('id'),
           title: $(model).data('title'),
+          description: $(model).data('description'),
           url: $(model).data('url'),
           type_id: $(model).data('type-id'),
           type_title: $(model).data('type-title')
@@ -302,6 +309,8 @@ MakeView = (function(superClass) {
     src = this.template({
       title: this.model.get('title'),
       url: this.model.get('url'),
+      description: this.model.get('description'),
+      meta_title: this.model.get('meta_title'),
       icon: this.model.get('icon') ? this.home + "/" + (this.model.get('icon')) : this.home + "/img/noavatar.png",
       models: this.models,
       buttonText: 'Принять изменения'
@@ -386,6 +395,8 @@ MakeView = (function(superClass) {
           id: $(model).data('id'),
           title: $(model).data('title'),
           url: $(model).data('url'),
+          description: $(model).data('description'),
+          meta_title: $(model).data('meta_title'),
           type_id: $(model).data('type-id'),
           type_title: $(model).data('type-title')
         });
@@ -394,7 +405,7 @@ MakeView = (function(superClass) {
   };
 
   MakeView.prototype.saveChanges = function() {
-    var icon, j, len, m, model, models, modelsArray, result, soviet, title, url;
+    var description, icon, j, len, m, meta_title, model, models, modelsArray, result, soviet, title, url;
     result = {};
     models = this.modelsView.get();
     title = this.popup.find('.make-title').val();
@@ -402,11 +413,19 @@ MakeView = (function(superClass) {
     soviet = parseInt(this.popup.find('.make-soviet').val());
     icon = this.popup.find('.make-icon').css('background-image');
     icon = icon.substring(4, icon.length - 1);
+    description = this.popup.find('.make-description').val();
+    meta_title = this.popup.find('.make-meta_title').val();
     if (title !== this.model.get('title')) {
       result.title = title;
     }
     if (url !== this.model.get('url')) {
       result.url = url;
+    }
+    if (description !== this.model.get('description')) {
+      result.description = description;
+    }
+    if (meta_title !== this.model.get('meta_title')) {
+      result.meta_title = meta_title;
     }
     if (soviet !== parseInt(this.model.get('soviet'))) {
       result.soviet = soviet;
@@ -423,6 +442,8 @@ MakeView = (function(superClass) {
         m.title = model.get('title');
         m.url = model.get('url');
         m.type = model.get('type_id');
+        m.description = model.get('description');
+        m.meta_title = model.get('meta_title');
         modelsArray.push(m);
       }
       result.models = modelsArray;
@@ -454,6 +475,8 @@ Make = (function(superClass) {
   Make.prototype.defaults = {
     id: '',
     title: '',
+    description: '',
+    meta_title: '',
     url: '',
     show: true,
     soviet: 1,
@@ -543,11 +566,13 @@ Makes = (function(superClass) {
   };
 
   Makes.prototype.createMake = function() {
-    var j, len, m, model, models, modelsArray, result, title, url;
+    var description, j, len, m, meta_title, model, models, modelsArray, result, title, url;
     result = {};
     models = this.modelsView.get();
     title = this.popup.find('.make-title').val();
     url = this.popup.find('.make-url').val();
+    description = this.popup.find('.make-description').val();
+    meta_title = this.popup.find('.make-meta_title').val();
     if (title !== '') {
       result.title = title;
     } else {
@@ -555,6 +580,16 @@ Makes = (function(superClass) {
     }
     if (url !== '') {
       result.url = url;
+    } else {
+      return;
+    }
+    if (description !== '') {
+      result.description = description;
+    } else {
+      return;
+    }
+    if (meta_title !== '') {
+      result.meta_title = meta_title;
     } else {
       return;
     }
@@ -567,6 +602,7 @@ Makes = (function(superClass) {
         m.url = model.get('url');
         m["new"] = model.get('new');
         m.type = model.get('type_id');
+        m.description = model.get('description');
         modelsArray.push(m);
       }
       result.models = modelsArray;
@@ -594,7 +630,9 @@ Makes = (function(superClass) {
           title: $(make).data('title'),
           url: $(make).data('url'),
           soviet: $(make).data('soviet'),
-          icon: $(make).data('icon')
+          icon: $(make).data('icon'),
+          description: $(make).data('description'),
+          meta_title: $(make).data('meta_title')
         });
         _this.collection.add(m);
         return v = new MakeView({

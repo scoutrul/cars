@@ -104,8 +104,28 @@ class SelectType extends Backbone.View
 		@$el.val()
 
 
+class SelectCType extends Backbone.View
+
+	initialize: ->
+		self = @
+
+		do @$el.selectBox
+
+		@$el.change ->
+
+			self.trigger 'changed', $(@).val()
+
+	error: ->
+		@$el.selectBox('control').blink()
+
+	get: ->
+		@$el.val()
+
 types = new SelectType
 	el: '#create-company-type'
+
+cType = new SelectCType
+	el: '#create-company-ctype'
 
 makes = new MakesList 
 	el: '#create-company_makes-models'
@@ -125,6 +145,13 @@ submit.click ->
 		result.type = parseInt types.get()
 	else
 		types.error()
+		return
+
+
+	if cType.get()?
+		result.cType = parseInt cType.get()
+	else
+		cType.error()
 		return
 	# ===================================
 
