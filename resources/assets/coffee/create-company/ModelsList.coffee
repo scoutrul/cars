@@ -154,6 +154,7 @@ class ModelsList extends Backbone.View
 
 	# add models to @modelsCollection
 	getModels: ->
+		console.log "#{@home}/#{@url}", @typeId
 		$.ajax "#{@home}/#{@url}",
 			data:
 				id: @typeId
