@@ -44,9 +44,8 @@ class TypeView extends Backbone.View
 	deactivate: =>
 		@$el.removeClass @class
 		$('#catalog-makes').find('a').each (i, element) =>
-			element.href = element.href.replace @model.attributes.name+'/', ""
+			element.href = element.href.replace @model.attributes.name+"/", ""
 		$('#catalog-specmakes').find('a').each (i, element) =>
-			console.log element.href
 			element.href = element.href.replace @model.attributes.name, ""
 
 		@state = false
