@@ -29,7 +29,7 @@
 						Запчасти и услуги для грузового транспорта
 					</span>
 					<br>
-					<span style="font-size:80%">	
+					<span style="font-size:90%">	
 						Поиск организаций:
 					</span>
 				</h3>
