@@ -48,6 +48,7 @@ class SelectView extends Backbone.View
 				for i, key in d
 					continue if typeof i is "undefined"
 					if(parseInt(i.type_id, 10) != parseInt(type, 10))
+						console.log "splicing: ", i
 						d.splice(key, 1);
 			self.options.json = d
 			do self.render
