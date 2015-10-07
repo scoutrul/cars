@@ -8,6 +8,7 @@ $('#search').magnificPopup
 model = new SelectView 
 	el: '#search-model'
 	url: 'api/get-models-by-make'
+	type: 0
 
 make = new SelectView 
 	el: '#search-make'

@@ -44,12 +44,11 @@ class SelectView extends Backbone.View
 				id: id
 		.done (d) ->
 			if(typeof self.options.type isnt "undefined")
-				console.log d
 				type = self.options.parent.options.parent.$el.val()
 				for i, key in d
-					if parseInt i.type_id, 10 != parseInt type, 10
+					continue if typeof i is "undefined"
+					if(parseInt(i.type_id, 10) != parseInt(type, 10))
 						d.splice(key, 1);
-				console.log d
 			self.options.json = d
 			do self.render
 
