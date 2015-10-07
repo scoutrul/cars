@@ -22,7 +22,7 @@
 
 				{!! Breadcrumbs::render('catalog', $bread) !!}
 
-				<h3 class="catalog_type">
+				<h1 class="catalog_type">
 					@if(isset($bread['spec']))
 
 						{{ $bread['spec']->title }}
@@ -40,7 +40,7 @@
 						
 					@endif
 
-				</h3>
+				</h1>
                 @if(isset($model))
                     @if($model->description && !empty($model->description))
                         <div class="model-description">
@@ -54,7 +54,8 @@
                         @if($make->icon)
                             <img src="/{{$make->icon}}" width="32">
                         @endif
-                        <span class="make-title">{{$make->title}}</span>
+
+                        <h1 class="make-title">{{$make->title}}</h1>
                         <div class="make-description">{{$make->description}}</div>
                     </div>
 					<div class="makes makes--catalog">
