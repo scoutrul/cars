@@ -27,7 +27,7 @@
 						<h5 class="company-preview_address">{{ $companies[$i]['address'] }}</h5>
 						<h5 class="company-preview_excerpt">
 							{{ substr($companies[$i]['about'], 
-								0, strpos($companies[$i]['about'], '.')+1) }}
+								0, 100) }}
 						</h5>
 					</div>
 					<div class="company-preview_more">
