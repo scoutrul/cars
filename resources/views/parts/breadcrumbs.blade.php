@@ -1,5 +1,5 @@
 <ul class="breadcrumb">
-	
+
 	@foreach($breadcrumbs as $breadcrumb)
 
 		@if($breadcrumb->last)
