@@ -10,7 +10,7 @@
 		<div id="search" class="search_button"
 		href="{{ Auth::guest() ? '#sign-up-popup' : 
 				( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
-			Искать
+			Найти деталь
 		</div>
 
 	</div>
