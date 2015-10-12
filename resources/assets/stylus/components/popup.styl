@@ -291,10 +291,10 @@
 		display none
 			
 		&:checked ~ label span	
-			color #DDD
+			color $linkred
 
 		&:checked ~ label .svg_info
-			fill #DDD
+			fill $linkred
 		
 		&:checked ~ label .info_content
 			overflow auto
@@ -310,9 +310,11 @@
 		cursor pointer
 		
 		span
-			color #4e61eb
+			color $bluelink
 			margin 10px 0
 			display inline-block
+		svg
+			fill $bluelink
 
 		
 	.svg_info

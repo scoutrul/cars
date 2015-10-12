@@ -3,16 +3,15 @@
 
 	.container
 		height 100px
-		// ------ all align mixin ------
 		display flex
 		align-items center
 		justify-content space-between
-		// -----------------------------
 		padding 0 10px
 		position relative
 		
 	&_box
-		width 100%
+		margin-right auto
+		width 350px
 	
 	&_logo
 		background url(../img/komtrans-logo.jpg) center no-repeat
@@ -22,22 +21,22 @@
 		position relative
 		
 		&:after
-			content "www.komtrans-club.ru: новый сайт"
+			content "www.komtrans-club.ru"
 			position absolute
 			left 0px
 			bottom -20px
-			color #f44
+			color $black
 			font-size 80%
 			font-style italic
 	
 	&_title
 		color $color
 		font-weight 400
-		font-size 14px
+		font-size 12px
 		word-spacing 2px
 		font-style italic
 		text-align center 
-		margin-top -50px
+		margin auto
 		
 		span
 			color #f44
@@ -48,9 +47,10 @@
 	
 	&_inputs
 		display flex
+		justify-content flex-end
 		position relative
-		top 35px
-		right 10px 
+		top 0px
+		right 0px 
 		
 	&_login,
 	&_pass
@@ -91,9 +91,8 @@
 		color: #FFF
 		
 	&_user-box
-		position absolute
-		top 0
-		right 0
+		width 350px
+		margin-left auto
 			
 	&_user-info
 		display flex

@@ -3,13 +3,15 @@
 	<div class="container">
 		
 		<div class="header_box">
-			<a href="/" title="На главную страницу Комтранс"><div class="header_logo"></div></a>
-			
-			<div class="header_title">
-				<span>Бесплатный</span>
-				Справочник коммерческих организаций<br>
-				по обслуживанию автомобилей и продаже запчастей.
-			</div>
+			<a href="/" title="На главную страницу Комтранс">
+				<div class="header_logo"></div>
+			</a>	
+		</div>
+
+		<div class="header_title">
+			<span>Новый, бесплатный</span>
+			справочник коммерческих организаций<br>
+			по обслуживанию автомобилей и продаже запчастей.
 		</div>
 
 		<div class="header_user-box">
