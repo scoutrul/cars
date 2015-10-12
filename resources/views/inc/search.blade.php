@@ -13,6 +13,7 @@
 			Найти деталь
 		</div>
 
+
 	</div>
 
 	@include('popups.search')

@@ -56,7 +56,6 @@
 		margin auto
 	
 	&_comp-logo
-		height 160px
 		margin-top 10px
 		text-align center
 		
@@ -253,11 +252,6 @@
 		&:hover
 			button--hover($yellow)
 			
-	&_info
-		font-style italic
-		margin 30px 0
-		text-align right
-		font-size 90%
 		
 	&_agree
 		display inline-block
@@ -280,3 +274,50 @@
 	a
 		&:hover
 			background-color white
+			
+
+.info_content
+	overflow hidden
+	height 0px
+	text-align justify
+	
+.popup_info,
+.popup_search
+	font-style italic
+	font-size 80%
+	letter-spacing 0.04em
+
+	&_checkbox
+		display none
+			
+		&:checked ~ label span	
+			color #DDD
+
+		&:checked ~ label .svg_info
+			fill #DDD
+		
+		&:checked ~ label .info_content
+			overflow auto
+			height 100%
+			color #232323
+			
+			
+	&_label
+		display block
+		width 100%
+		text-align left
+		margin 20px 0
+		cursor pointer
+		
+		span
+			color #4e61eb
+			margin 10px 0
+			display inline-block
+
+		
+	.svg_info
+		display: inline-block;
+		vertical-align: text-top;
+			
+	hr 
+		margin: 20px 0 10px 0
