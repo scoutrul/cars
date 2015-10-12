@@ -21,6 +21,17 @@
 		display flex
 		justify-content space-between
 		
+		svg
+			margin 20px
+			fill $svgicon
+			
+		&:before 
+			content "Рейтинг статьи: "
+			position absolute
+			font-size 80%
+			color #2D2D2D
+			letter-spacing 0.06em
+		
 	&_votes &_likes,
 	&_votes &_dislikes
 		cursor auto
@@ -53,14 +64,12 @@
 		align-items center
 		user-select none
 		cursor pointer
-		padding 8px 15px
 		
 		span
 			margin-right 7px
 	
 	&_likes
 		color #cbe887
-		margin-right 25px
 		
 		&--active
 			background-color #f6fae9
@@ -131,31 +140,45 @@
 		
 
 
-.mention-side
-	background-color white
-	block-border()
-	padding 10px 20px
-
-.mention-block
-	padding 10px
-	
-	a
-		color #4e61eb
-		display block
+	&-side
+		background-color white
+		block-border()
+		padding 20px
+		text-align center
 		
-	
-	&_header
-		
-		img
-			float left
-			margin-right 5px
-			width 19px
+		svg
+			fill $svgicon
 			
-	&_body
-		clear both
-		font-style italic
+	&-header
+		font-size 16px
+		margin 10px 0
+
+
+	&-block
+		padding 10px
+		text-align left
+			
+		&_header
+			
+			a
+				color #4e61eb
+				display block
+				
+				&:hover
+					color $linkred
+			img
+				float left
+				margin-right 5px
+				width 19px
+				
+		&_body
+			clear both
+			font-style italic
+			
+		&_date
+			color #ccc
+			font-size 80%
+			margin 3px 0
 		
-	&_date
-		color #ccc
-		font-size 80%
-		margin 3px 0
+		hr 
+			margin 20px 0 0
