@@ -5,7 +5,7 @@
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>
 
-    <h3 class="mention-header">Новые отзывы об авто</h3>
+    <h3 class="mention-header">Новые отзывы</h3>
     @foreach($reviews as $review)
         <div class="mention-block">
             <div class="mention-block_header">
