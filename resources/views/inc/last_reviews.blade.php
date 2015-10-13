@@ -20,7 +20,6 @@
             <div class="mention-block_date">
                 <?= $review->created_at->format('d.m.Y'); ?>
             </div>
-            <hr>
         </div>
     @endforeach
 </div>
