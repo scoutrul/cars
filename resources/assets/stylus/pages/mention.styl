@@ -1,13 +1,24 @@
 .mention
 	padding 25px 35px
+	line-height 170%
 	
+	&_add
+		color $bluelink
+		cursor pointer
+		font-size 80%
+		position absolute
+		right 36px
+		top -10px
+		
+		&:hover
+			color $redlink	
+
 	&_head
 		display flex
 		justify-content space-between
-		margin-bottom 15px
+		clear both
 	
 	&_header
-		width 520px
 		margin 0
 		font-weight 400
 	
@@ -21,13 +32,19 @@
 		display flex
 		justify-content space-between
 		
-			
+		svg
+			margin 20px 
+				
 		&:before 
 			content "Рейтинг статьи: "
 			position absolute
-			font-size 80%
+			font-size 70%
 			color #2D2D2D
 			letter-spacing 0.06em
+			white-space nowrap
+			top -5px
+			right 0
+			font-style italic
 		
 	&_votes &_likes,
 	&_votes &_dislikes

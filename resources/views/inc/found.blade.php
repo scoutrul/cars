@@ -1,6 +1,12 @@
 <div class="found">
 
 	<hr>
+	
+	@if(Auth::guest())
+	<div class="company-signup_button_list_add" href="#company-signup-popup">
+		Добавить компанию
+	</div>
+	@endif
 
 	<h3>Найденные организации</h3>
 

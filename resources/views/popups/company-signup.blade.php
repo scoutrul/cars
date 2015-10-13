@@ -9,6 +9,27 @@
 			<div class="create-company_higher">
 
 				<div>
+					<div class="popup_field">
+					
+						<div class="popup_label">Специализация</div>
+						
+						<select name="" id="create-company-spec" class="popup_select create-company-spec create-company">
+
+							<option value="" disabled selected></option>
+							
+							@foreach($specs as $spec)
+								
+								<option value="{{ $spec->id }}" class="popup_option">
+									{{ $spec->title }}
+								</option>
+					
+							@endforeach
+					
+						</select>
+					
+					</div>
+				</div>
+				<div>
 					<div class="popup_field popup_field--types">
 					
 						<div class="popup_label">Ориентация</div>
@@ -30,27 +51,6 @@
 					
 					</div>
 				</div>
-				<div>
-					<div class="popup_field">
-					
-						<div class="popup_label">Специализация</div>
-						
-						<select name="" id="create-company-spec" class="popup_select create-company-spec create-company">
-
-							<option value="" disabled selected></option>
-							
-							@foreach($specs as $spec)
-								
-								<option value="{{ $spec->id }}" class="popup_option">
-									{{ $spec->title }}
-								</option>
-					
-							@endforeach
-					
-						</select>
-					
-					</div>
-				</div>
 
 			</div>
 
@@ -60,7 +60,7 @@
 					<div class="popup_label">Производители</div>
 					
 					<div class="popup_plus-sign">
-						+
+						+ Добавить
 					</div>
 				</div>
 
@@ -74,7 +74,7 @@
 						<div class="popup_label">Название</div>
 					
 						<input id="create-company-name" type="text" class="popup_input" 
-						placeholder="ООО 'Комтранс'">
+						placeholder="Например: 'Комтранс'">
 					
 					</div>
 
@@ -92,7 +92,7 @@
 						<div class="popup_label">Телефоны</div>
 					
 						<input id="create-company-phone" type="text" class="popup_input" 
-						placeholder="8 (495) 123-45-67">
+						placeholder="Например: 8 (495) 123-45-67">
 					
 					</div>
 				</div>
@@ -178,7 +178,7 @@
 
 		</div>
 
-		<div id="create-company-submit" class="popup_button">Добавить компанию</div>
+		<div id="create-company-submit" class="popup_button">Зарегистрировать компанию</div>
 
 	</div>
 

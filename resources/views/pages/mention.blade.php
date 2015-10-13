@@ -6,11 +6,19 @@
 
 	<div class="mention">
 		
+		<div class="mention_add"
+		href="{{ Auth::guest() ? '#sign-up-popup' : 
+				( Auth::user()->is_ready() ? '#feedback-popup' : '#fill-up-profile-popup' ) }}" >
+			
+			Добавить отзыв
+		</div>
+
 		<div class="mention_head">
 
-			<h3 class="mention_header">
+
+			<h1 class="mention_header">
 				{{ $mention->header }}
-			</h3>
+			</h1>
 
 			<div class="mention_votes"> 
 
