@@ -22,4 +22,6 @@
             </div>
         </div>
     @endforeach
+
+    <a class="mention-link" href="/article">Все отзывы</a>
 </div>

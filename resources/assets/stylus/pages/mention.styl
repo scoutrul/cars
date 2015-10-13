@@ -152,6 +152,9 @@
 		padding 13px 10px
 		text-align left
 		border-bottom 1px solid #F5F5F5
+		
+		&:last-child
+			border none
 			
 		&_header
 			
@@ -177,3 +180,17 @@
 		
 		hr 
 			margin 20px 0 0
+	
+	&-link
+		display block
+		width 100%
+		text-align right
+		margin 10px 0 0
+		color $blue
+		font-size 90%
+		
+		&:before
+			content '/'
+			color black
+			margin-right 5px
+			
