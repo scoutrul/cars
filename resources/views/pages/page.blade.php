@@ -21,6 +21,8 @@
 				<div class="sticky">
 					@include('inc.search')
 					
+					@include('inc.company-signup')
+					
 					@include('inc.feedback')
 				</div>
 

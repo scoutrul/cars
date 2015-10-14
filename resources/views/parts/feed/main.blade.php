@@ -4,7 +4,8 @@
     @if(isset($bread))
         {!! Breadcrumbs::render('feed', $bread) !!}
     @endif
-	<h3 class="feed_header">Отзывы</h3>
+	<h1 class="feed_header">Отзывы о ваших авто</h1>
+
 				
 	@foreach($types as $type)
 
