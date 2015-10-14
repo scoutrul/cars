@@ -10,8 +10,8 @@
 			
 			<div class="home_left">
 				
-
-				@include('inc.company-signup')
+				@include('inc.search')
+				
 
 
 				@include('inc.specs')
@@ -53,7 +53,7 @@
 			<div class="home_right">
 				
 				<div class="sticky">
-					@include('inc.search')
+					@include('inc.company-signup')
 					
 					@include('inc.feedback')
 
