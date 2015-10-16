@@ -9,11 +9,11 @@
 		<div class="container">
 
 			<div class="catalog_left">
-
-				@include('inc.search')
-				
-				@include('inc.specs')
-
+				<div class="sticky">
+					@include('inc.search')
+					
+					@include('inc.specs')
+				</div>
 			</div>
 			
 			<div class="catalog_middle">

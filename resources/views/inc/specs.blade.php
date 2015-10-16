@@ -1,10 +1,7 @@
-<div class="sticky">
+
 
 	<div class="specs">
 		
-
-
-
 		<h3 class="specs_header">Каталог организаций</h3>
 
 		<ul class="specs_menu">
@@ -65,4 +62,3 @@
 			</div>
 		</a>
 	</div>
-</div>

@@ -9,14 +9,11 @@
 		<div class="container">
 			
 			<div class="home_left">
-				
-				@include('inc.search')
-				
-
-
-				@include('inc.specs')
-
-
+				<div class="sticky">
+					@include('inc.search')
+					
+					@include('inc.specs')
+				</div>
 
 
 
