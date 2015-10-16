@@ -5,8 +5,8 @@
 	></div>
 	<div class="company-preview_info">
 		<h3>{{name}}</h3>
-		<h5>{{address}}</h5>
-		<h5>{{excerpt}}</h5>
+		<h5><b>Адрес:</b> {{address}}</h5>
+		<h5><b>Описание:</b> {{excerpt}}</h5>
 	</div>
 
 	<div class="company-preview_more">

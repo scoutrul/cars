@@ -6,8 +6,8 @@
 		></div>
 		<div class="company-preview_info">
 			<h3>{{name}}</h3>
-			<h5>{{address}}</h5>
-			<h5>{{phone}}</h5>
+			<h5><b>Адрес:</b> {{address}}</h5>
+			<h5><b>Описание:</b> {{phone}}</h5>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 
 	</div>
 
-	<h4 class="company-popup_desc">Описание</h4>
+	<h4 class="company-popup_desc">Об организации</h4>
 
 	<p class="company-popup_description">
 		{{about}}
