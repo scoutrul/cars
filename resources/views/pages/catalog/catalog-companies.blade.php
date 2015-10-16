@@ -33,7 +33,7 @@
 
 					@else
                         @if(isset($model))
-                            <img src="/{{$make->icon}}" width="32">{{$make->title}} / {{$model->title}}
+                            <img src="/{{$make->icon}}">{{$make->title}} / {{$model->title}}
                         @else
 						    {{ 'Каталог' }}
                         @endif
@@ -52,7 +52,7 @@
 				@if(isset($models))
                     <div class="make-info">
                         @if($make->icon)
-                            <img src="/{{$make->icon}}" width="32">
+                            <img src="/{{$make->icon}}">
                         @endif
 
                         <h1 class="make-title">{{$make->title}}</h1>
