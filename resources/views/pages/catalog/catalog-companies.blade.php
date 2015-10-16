@@ -10,7 +10,7 @@
 
 			<div class="catalog_left">
 
-				@include('inc.company-signup')
+				@include('inc.search')
 				
 				@include('inc.specs')
 
@@ -121,7 +121,7 @@
 			<div class="catalog_right">
 				
 				<div class="sticky">
-					@include('inc.search')
+					@include('inc.company-signup')
 					
 					@include('inc.feedback')
 
