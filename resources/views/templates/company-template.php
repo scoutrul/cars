@@ -7,7 +7,7 @@
 		<div class="company-preview_info">
 			<h3>{{name}}</h3>
 			<h5><b>Адрес:</b> {{address}}</h5>
-			<h5><b>Описание:</b> {{phone}}</h5>
+			<h5><b>Контакты:</b> {{phone}}</h5>
 		</div>
 	</div>
 
