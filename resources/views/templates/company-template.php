@@ -6,7 +6,7 @@
 		></div>
 		<div class="company-preview_info">
 			<div class="company-preview_info_name">{{name}}</div>
-			<div class="company-preview_info_adress"><b>Адрес:</b> {{address}}</div>
+			<div class="company-preview_info_address"><b>Адрес:</b> {{address}}</div>
 			<div class="company-preview_info_contact"><b>Контакты:</b> {{phone}}</div>
 		</div>
 	</div>

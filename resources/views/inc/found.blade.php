@@ -3,9 +3,9 @@
 	<hr>
 	
 	@if(Auth::guest())
-	<div class="company-signup_button_list_add" href="#company-signup-popup">
-		Добавить компанию
-	</div>
+		<div class="company-signup_button_list_add" href="#company-signup-popup">
+			Добавить компанию
+		</div>
 	@endif
 
 	<h3>Найденные организации</h3>
@@ -30,7 +30,7 @@
 					style="background-image: url({{ URL::to('/') . '/' . $companies[$i]['logo'] }})"></div>
 					<div class="company-preview_info">
 						<div class="company-preview_name">{{ $companies[$i]['name'] }}</div>
-						<div class="company-preview_adress">{{ $companies[$i]['address'] }}</div>
+						<div class="company-preview_address">{{ $companies[$i]['address'] }}</div>
 						<div class="company-preview_excerpt">
 							{{ substr($companies[$i]['about'], 
 								0, 100) }}
@@ -42,6 +42,8 @@
 					<div class="company-preview_data"
 						data-phone="{{ $companies[$i]['phone'] }}"
 						data-about="{{ $companies[$i]['about'] }}"
+						data-address="{{ $companies[$i]['address'] }}"
+
 					>
 						@foreach($companies[$i]['tags'] as $tag)
 
