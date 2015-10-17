@@ -54,7 +54,7 @@
 				</div>
 
 			@endif
-
+			<hr>
 		@endfor
 
 	</div>
