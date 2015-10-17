@@ -19,6 +19,7 @@
 		align-self flex-start
 		display flex
 		align-items center
+		font-style italic
 		
 		svg
 			width 16px
@@ -45,36 +46,45 @@
 			
 	&_info
 		min-height 100px
+		width 100%
 		
-		h3, h5
-			margin 0
-		
-		h3
-			font-size 17px
-			font-weight 300
+		&_name
+			font-size 24px
+			margin-bottom 15px
 			
-		h5
+		&_adress
 			margin 10px 0
-			font-weight 300
-			font-size 12px
-			padding 8px
-			background-color $grey
-			margin-right 5px
-			margin-bottom 5px
-			color $color
-			border-radius 2px
+		&_contact
+			margin 10px 0
+			
+			
+
+	&_name
+		margin 5px 0px
+		font-weight 400
+		
+	&_adress
+		font-size 90%
+		font-weight 300
+			
+	&_excerpt
+		margin 10px 0
+		font-weight 300
+		font-size 12px
+		padding 8px
+		background-color $grey
+		margin-right 5px
+		margin-bottom 5px
+		color $color
+		border-radius 2px
 		
 
 .company-popup
+	letter-spacing 0.02em
 	
 	.company-preview
 		
 		&_logo
-			min-width 180px
-			min-height 180px
-		h3 
-			font-size 26px
-			
-		h4
-			margin 15px 0 5px
+			min-width 150px
+			min-height 150px
 			

@@ -5,13 +5,13 @@
 			style="background-image: {{logo}}"
 		></div>
 		<div class="company-preview_info">
-			<h3>{{name}}</h3>
-			<h5><b>Адрес:</b> {{address}}</h5>
-			<h5><b>Контакты:</b> {{phone}}</h5>
+			<div class="company-preview_info_name">{{name}}</div>
+			<div class="company-preview_info_adress"><b>Адрес:</b> {{address}}</div>
+			<div class="company-preview_info_contact"><b>Контакты:</b> {{phone}}</div>
 		</div>
 	</div>
 
-	<h4 class="company-popup_spec">Специализация</h4>
+	<div class="company-popup_spec">Специализация</div>
 
 	<div class="company-popup_tags">
 		{{#each tags}}
@@ -20,7 +20,7 @@
 
 	</div>
 
-	<h4 class="company-popup_desc">Об организации</h4>
+	<div class="company-popup_desc">Об организации</div>
 
 	<p class="company-popup_description">
 		{{about}}
