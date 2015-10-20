@@ -13,7 +13,7 @@
 ?>
 
 <div class="makes">
-	
+
 	@include('parts.media-header', ['title' => 'Выберите производителя'])
 
 	@if($id == 'catalog-makes')	
@@ -65,7 +65,6 @@
 								<a href="{{ route('catalog-nospecs', $make->name) }}">{{ $make->title }}</a>
 							@else
                                 @if(isset($no_type))
-                                    {{dd(route('make', ['spec' => $spec->name, 'make' => $make->name, 'type' => $bread['type']->name]))}}
                                     <a href="{{ route('make', ['spec' => $spec->name, 'make' => $make->name, 'type' => $bread['type']->name]) }}">
                                         {{ $make->title }}
                                     </a>

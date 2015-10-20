@@ -134,7 +134,8 @@ class FeedbackController extends Controller {
 	}
 
 	public function mention(Request $request) {
-        $slug = $request->route('id');
+
+		$slug = $request->route('id');
         if($slug === null)
             $slug = $request->route('model');
         if($slug === null)

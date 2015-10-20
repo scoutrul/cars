@@ -167,7 +167,7 @@ Route::group(['prefix' => 'article'], function(){
 		'as' => 'mention',
 		'uses' => 'FeedbackController@mention'
 
-	])->where('id', '[a-z+-]+');
+	])->where('id', '[0-9a-z+-]+');
 
     get('{type}', [
         'as' => 'feedback-type',
