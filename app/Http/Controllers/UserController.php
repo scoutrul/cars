@@ -32,8 +32,6 @@ class UserController extends Controller {
 
 		}
 
-		echo 'fuck';
-
 	}
 
 	public function edit() {
@@ -74,7 +72,7 @@ class UserController extends Controller {
 		}
 
 		if( $new != $newRepeat)
-			throw 'fuck';
+			return 'wrong';
 
 		$user->password = \Hash::make($new);
 		$user->save();
