@@ -66,11 +66,10 @@
 	@endif
 
 
-
-	<div class="search_button" style="margin: auto"
-		 href="{{ Auth::guest() ? '#sign-up-popup' :
-		( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
+	<a class="search_button" style="margin: auto"
+		href="{{ Auth::guest() ? '#sign-up-popup' :
+			( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
 		Поиск запчастей
-	</div>
+	</a>
 
 </div>
