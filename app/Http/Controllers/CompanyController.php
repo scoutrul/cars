@@ -224,10 +224,10 @@ class CompanyController extends Controller {
 
 		\Auth::login($user);
 
-//		\Mail::queue('emails.verify', ['code' => $code], function($msg) use ($user){
-//			$msg->to($user->email)
-//			->subject('Подтверждение почты');
-//		});
+		\Mail::queue('emails.verify', ['code' => $code], function($msg) use ($user){
+			$msg->to($user->email)
+			->subject('Подтверждение почты');
+		});
 
 		$this->create();
 
