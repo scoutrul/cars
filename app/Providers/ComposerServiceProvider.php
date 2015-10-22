@@ -20,6 +20,7 @@ class ComposerServiceProvider extends ServiceProvider {
         View::composer('inc.footer', 'App\Http\ViewComposers\FooterComposer');
         View::composer('inc.menu', 'App\Http\ViewComposers\MenuComposer');
         View::composer(['inc.search', 'inc.feedback', 'inc.type', 'popups.create-company', 'popups.company-signup'], 'App\Http\ViewComposers\TypesComposer');
+        View::composer(['popups.create-company', 'popups.company-signup'], 'App\Http\ViewComposers\CTypesComposer');
 	}
 
 	public function register()

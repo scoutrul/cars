@@ -127,7 +127,6 @@ class CatalogController extends Controller {
 
 	public function nospecs($type, $make)
     {
-
 		$make = $this->makesRepository->getFirstByName($make);
         $type = $this->typeRepository->getFirstByName($type);
         if(!$type)

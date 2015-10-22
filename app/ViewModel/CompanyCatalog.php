@@ -31,6 +31,7 @@ class CompanyCatalog {
         $arr = array();
         $t = array();
         $arr['name'] = $company->name;
+        $arr['title'] = $company->title;
         $arr['about'] = $company->about;
         $arr['phone'] = $company->phone;
         $arr['logo'] = $company->logo;

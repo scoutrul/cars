@@ -6,6 +6,8 @@ class Singleton {
 
 	private static $specs;
 
+	private static $ctypes;
+
 	public static function types() {
 
 		if(self::$types)
@@ -24,6 +26,17 @@ class Singleton {
 		else {
 			self::$specs = \App\Spec::all();
 			return self::$specs;
+		}
+
+	}
+
+	public static function ctypes() {
+
+		if(self::$ctypes)
+			return self::$ctypes;
+		else {
+			self::$ctypes = \App\CType::all();
+			return self::$ctypes;
 		}
 
 	}

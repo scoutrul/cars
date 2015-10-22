@@ -9,9 +9,15 @@ $('#footer-sign-up').magnificPopup
 	closeBtnInside: true
 
 $('#company-signup-button').magnificPopup
-	
+
 	type:'inline'
 	closeBtnInside: true
+
+$('.company-signup_button_list_add').magnificPopup
+
+	type:'inline'
+	closeBtnInside: true
+
 
 $.fn.highlight = ->
 	$(@).animate

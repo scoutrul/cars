@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('body')
-	
 	<div class="catalog">
 		
 		<div class="wide-image"></div>
@@ -28,7 +27,6 @@
 						{{ $bread['spec']->title }}
 
 					@elseif(isset($nospecs))
-						
 						{{--{{ $bread['nospecs']->title }}--}}
 
 					@else

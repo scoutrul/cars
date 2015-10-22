@@ -52,7 +52,7 @@
 				<div class="profile_row">
 					<div class="profile_label">Компания:</div>
 					<h3 id="profile-company-name" class="profile-info_name">
-						<span>{{ $user->company->name }}</span>
+						<span>{{ $user->company->title }}</span>
 						<span id="profile-company-pen" href="#edit-company-profile-popup" class="profile-info_pen"></span>
 					</h3>
 				</div>
