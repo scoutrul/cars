@@ -24,6 +24,7 @@ class CompanyController extends Controller {
 		$company->user_id = \Auth::id();
 		$company->type_id = \Input::get('type');
 		$company->spec_id = \Input::get('spec');
+		$company->ctype_id = \Input::get('cType');
 
 		if( $this->attach_makes_models($company, \Input::get('makesmodels')) )
 			return 'hello lamer';
@@ -47,7 +48,8 @@ class CompanyController extends Controller {
 			'about' => 'required',
 			'logo' => 'required',
 			'type' => 'required|exists:types,id',
-			'spec' => 'required|exists:specs,id'
+			'spec' => 'required|exists:specs,id',
+			'cType' => 'required',
 		]);
 
 		if($validator->fails())

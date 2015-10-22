@@ -2,7 +2,7 @@
 
 Admin::model(App\Company::class)->title('Компании')
 ->as('companies')
-->with(['makes.models', 'user', 'models'])
+->with(['makes.models', 'user', 'models', 'ctype'])
 ->denyCreating()
 ->columns(function ()
 {
@@ -22,6 +22,8 @@ Admin::model(App\Company::class)->title('Компании')
 
 	FormItem::select('status', 'Статус')
 	->list([1 => 'Подтвержден', 2 => 'Отклонен']);
+
+	FormItem::select('ctype_id', 'Форма собственности')->list(\App\CType::class);
 
 	FormItem::text('name', 'Название');
 

@@ -6,7 +6,10 @@ class Company extends Model {
 
 	protected $table = 'companies';
 
-	protected $fillable = ['name', 'address', 'phone', 'about', 'status'];
+	protected $fillable = ['ctype_id', 'name', 'address', 'phone', 'about', 'status'];
+
+	protected $appends = ['title'];
+
 
 	public function user() {
 		return $this->belongsTo('App\User', 'user_id');
@@ -19,6 +22,18 @@ class Company extends Model {
 	public function spec() {
 		return $this->belongsTo('App\Spec', 'spec_id');
 	}
+
+
+	/**
+	 * Get the Type of ownership fo current company
+	 *
+	 * @return mixed
+	 */
+	public function cType() {
+		return $this->belongsTo('App\CType', 'ctype_id');
+	}
+
+
 
 	public function models() {
 
@@ -41,5 +56,17 @@ class Company extends Model {
 	public function rooms() {
 		return $this->hasMany('App\Room', 'company_id');
 	}
+
+
+	/**
+	 * Get company name with type of ownership
+	 *
+	 * @return string
+	 */
+	public function getTitleAttribute()
+	{
+		return ( ! is_null($this->cType) && $this->cType->display) ? $this->cType->name . ' ' . $this->name : $this->name;
+	}
+
 
 }

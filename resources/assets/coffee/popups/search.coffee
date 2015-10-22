@@ -1,6 +1,6 @@
 SelectView = require '../inc/SelectView'
 
-$('#search').magnificPopup
+$('.search_button').magnificPopup
 
 	type : 'inline'
 	closeBtnInside: true

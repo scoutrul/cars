@@ -30,3 +30,5 @@ Column::register('in_menu', \App\Columns\InMenuColumn::class);
 Column::register('content', \App\Columns\PageContentColumn::class);
 
 Column::register('soviet', \App\Columns\SovietColumn::class);
+
+Column::register('display', \App\Columns\DisplayColumn::class);

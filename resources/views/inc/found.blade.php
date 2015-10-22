@@ -3,9 +3,9 @@
 	<hr>
 	
 	@if(Auth::guest())
-		<div class="company-signup_button_list_add" href="#company-signup-popup">
+		<a class="company-signup_button_list_add"  href="#company-signup-popup">
 			Добавить компанию
-		</div>
+		</a>
 	@endif
 
 	<h3>Найденные организации</h3>
@@ -29,7 +29,7 @@
 					<div class="company-preview_logo"
 					style="background-image: url({{ URL::to('/') . '/' . $companies[$i]['logo'] }})"></div>
 					<div class="company-preview_info">
-						<div class="company-preview_name">{{ $companies[$i]['name'] }}</div>
+						<div class="company-preview_name">{{ $companies[$i]['title'] }}</div>
 						<div class="company-preview_address">{{ $companies[$i]['address'] }}</div>
 						<div class="company-preview_excerpt">
 							{{ substr($companies[$i]['about'], 
@@ -65,10 +65,11 @@
 		</div>
 	@endif
 
-	<div id="search" class="search_button" style="margin: auto" 
-	href="{{ Auth::guest() ? '#sign-up-popup' : 
+
+	<a class="search_button" style="margin: auto"
+		href="{{ Auth::guest() ? '#sign-up-popup' :
 			( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
 		Поиск запчастей
-	</div>
+	</a>
 
 </div>

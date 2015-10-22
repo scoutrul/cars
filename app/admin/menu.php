@@ -38,3 +38,5 @@ Admin::menu(\App\Comment::class);
 Admin::menu()->url('makes')->uses('App\Http\Controllers\AdminController@makes')->label('Марки и модели');
 
 Admin::menu(\App\CarModel::class);
+
+Admin::menu(\App\CType::class)->icon('fa-suitcase');
