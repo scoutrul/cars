@@ -57,6 +57,8 @@
                         <div class="catalog-make-description">{{$make->description}}</div>
                     </div>
 					<div class="makes makes--catalog">
+
+						<h2>Модельный ряд:</h2>
 					
 						<ul>	
 						
