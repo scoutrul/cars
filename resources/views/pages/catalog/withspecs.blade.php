@@ -3,7 +3,10 @@
 @section('catalog')
 
 	<h1 class="catalog_type">{{ $spec->title }}</h1>
-	@if($meta_description)
+
+	@if(!empty($meta_tag_description))
+		<div class="model-description">{{ $meta_tag_description->description }}</div>
+	@elseif($meta_description)
 		<div class="meta_description">{{ $meta_description }}</div>
 	@endif
 

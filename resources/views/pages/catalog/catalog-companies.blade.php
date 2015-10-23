@@ -39,13 +39,17 @@
 					@endif
 
 				</h1>
-                @if(isset($model))
+                {{--@if(isset($model))
                     @if($model->description && !empty($model->description))
                         <div class="model-description">
                             {{$model->description}}
                         </div>
                     @endif
-                @endif
+                @endif--}}
+
+				@if(!empty($meta_tag_description))
+					<div class="model-description">{{ $meta_tag_description->description }}</div>
+				@endif
 
 				@if(isset($models))
                     <div class="catalog-make-info">
