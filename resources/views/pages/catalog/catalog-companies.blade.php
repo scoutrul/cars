@@ -48,15 +48,17 @@
                 @endif
 
 				@if(isset($models))
-                    <div class="make-info">
+                    <div class="catalog-make-info">
                         @if($make->icon)
                             <img src="/{{$make->icon}}">
                         @endif
 
-                        <h1 class="make-title">{{$make->title}}</h1>
-                        <div class="make-description">{{$make->description}}</div>
+                        <h1 class="catalog-make-title">{{$make->title}}</h1>
+                        <div class="catalog-make-description">{{$make->description}}</div>
                     </div>
 					<div class="makes makes--catalog">
+
+						<h2>Модельный ряд:</h2>
 					
 						<ul>	
 						

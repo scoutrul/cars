@@ -8,7 +8,7 @@
 		</a>
 	@endif
 
-	<h3>Найденные организации</h3>
+	<h3>Профильные организации {{$make->title}}</h3>
 
 	@if(isset($spec_id))
 		<div class="company-preview-list" id="catalog-companies"
