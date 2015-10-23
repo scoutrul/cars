@@ -8,9 +8,18 @@
 		</a>
 	@endif
 
-	<h3>Профильные организации {{$make->title}}:</h3>
+	<h3>Профильные организации 
+
+	@if(isset($model))
+		{{$make->title}} / {{$model->title}}
+	@else
+		{{$make->title}}
+	@endif
 
 	@if(isset($spec_id))
+
+	:</h3>
+	
 		<div class="company-preview-list" id="catalog-companies"
 		data-make="{{ $make_id }}"
 		data-spec="{{ $spec_id }}"
