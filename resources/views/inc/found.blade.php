@@ -18,6 +18,7 @@
 
 	:</h3>
 
+	@if(isset($spec_id))
 		<div class="company-preview-list" id="catalog-companies"
 		data-make="{{ $make_id }}"
 		data-spec="{{ $spec_id }}"
