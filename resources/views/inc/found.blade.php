@@ -8,12 +8,10 @@
 		</a>
 	@endif
 
-	<h3>Профильные организации 
+	<h3>Профильные организации {{$make->title}}
 
 	@if(isset($model))
-		{{$make->title}} / {{$model->title}}
-	@else
-		{{$make->title}}
+		{{$model->title}}		
 	@endif
 
 	:</h3>
