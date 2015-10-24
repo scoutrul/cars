@@ -52,7 +52,7 @@ class MakeList extends Backbone.View
 			do (i) ->
 				setTimeout ->
 					self.get i
-				, 1000
+				, 0
 
 	fillCollection: ->
 		@$el.find('li').each (i, li) =>
