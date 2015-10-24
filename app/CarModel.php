@@ -61,4 +61,16 @@ class CarModel extends Model implements IHasMetaTitleAndDescription{
 		return false;
 	}
 
+
+	/**
+	 * Get the array for admin panel with titles and ids
+	 *
+	 * @return array
+	 */
+	public static function getList()
+	{
+		return static::lists('title', 'id');
+	}
+
+
 }

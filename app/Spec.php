@@ -17,4 +17,17 @@ class Spec extends Model implements IHasMetaTitleAndDescription{
 		return $this->hasMany('App\Company', 'spec_id');
 	}
 
+
+
+	/**
+	 * Get the array for admin panel with titles and ids
+	 *
+	 * @return array
+	 */
+	public static function getList()
+	{
+		return static::lists('title', 'id');
+	}
+
+
 }

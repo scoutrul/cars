@@ -5,7 +5,7 @@
 		<div class="feedlist_item">
 
 			<div class="feedlist_img">
-				<img src="{{ $feed->logo }}" alt="">
+				<img src="{{ $feed->photos->count() ? asset('/' . $feed->photos->first()->src) : $feed->logo }}" alt="{{ $feed->header }}">
 			</div>
 		
 			<div class="mention_info">

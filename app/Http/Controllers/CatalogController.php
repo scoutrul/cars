@@ -1,13 +1,20 @@
 <?php namespace App\Http\Controllers;
 
+use App\CarModel;
+use App\Make;
 use App\Repository\CarModelRepository;
 use App\Repository\CompanyRepository;
 use App\Repository\MakesRepository;
 use App\Repository\SpecsRepository;
 use App\Repository\TypeRepository;
+use App\Traits\Meta;
+use App\Type;
 use App\ViewModel\CompanyCatalog;
+use Illuminate\Http\Request;
 
 class CatalogController extends Controller {
+
+    use Meta;
 
     /**
      * @var MakesRepository
@@ -37,8 +44,8 @@ class CatalogController extends Controller {
     public function __construct(
         MakesRepository $makesRepository, SpecsRepository $specsRepository,
         CompanyRepository $companyRepository, CarModelRepository $carModelRepository,
-        TypeRepository $typeRepository)
-    {
+        TypeRepository $typeRepository
+    ){
         $this->makesRepository = $makesRepository;
         $this->specsRepository = $specsRepository;
         $this->companyRepository = $companyRepository;
@@ -59,6 +66,9 @@ class CatalogController extends Controller {
         $spec = $this->specsRepository->getForCatalogByName($name);
 		if(!$spec)
 			abort(404);
+
+        $this->composeMeta($spec);
+
 		return view('pages.catalog.withspecs')
 			->with('spec', $spec)
 			->with('makes', $this->makesRepository->getForCatalogBySpec($spec))
@@ -80,6 +90,9 @@ class CatalogController extends Controller {
 		if(!$make)
 			abort(404);
 		$models = $this->carModelRepository->getByMakeWithCompanies($make, $type);
+
+        $this->composeMeta($spec, $type, $make);
+
 		return view('pages.catalog.catalog-companies', [
             'spec' => $spec,
             'models' => $models,
@@ -97,6 +110,9 @@ class CatalogController extends Controller {
         $type = $this->typeRepository->getFirstByName($type);
         if(!$type)
             abort(404);
+
+        $this->composeMeta(null, $type);
+
         return view('pages.catalog.nospecs')
             ->with('makes', $this->makesRepository->getForCatalogByType($type))
             ->with('no_type', true)
@@ -112,6 +128,9 @@ class CatalogController extends Controller {
             abort(404);
         if(!$spec)
             abort(404);
+
+        $this->composeMeta($spec, $type);
+
         return view('pages.catalog.withspecs', [
             'makes' => $this->makesRepository->getForCatalogBySpecAndType($type, $spec),
             'no_type' => true,
@@ -133,6 +152,9 @@ class CatalogController extends Controller {
             abort(404);
 		if(!$make)
 			abort(404);
+
+        $this->composeMeta(null, $type, $make);
+
 		return view('pages.catalog.catalog-companies', [
             'bread' => ['type' => $type,'nospecs' => $make],
             'make' => $make,
@@ -151,6 +173,9 @@ class CatalogController extends Controller {
         $make = $this->makesRepository->getFirstByName($make);
         if(!$make)
             abort(404);
+
+        $this->composeMeta(null, null, $make);
+
         return view('pages.catalog.catalog-companies', [
             'bread' => ['nospecs' => $make],
             'make' => $make,
@@ -167,6 +192,9 @@ class CatalogController extends Controller {
         $make = $this->makesRepository->getFirstByName($make);
         if(!$make)
             abort(404);
+
+        $this->composeMeta(null, null, $make);
+
         return view('pages.catalog.catalog-companies', [
             'bread' => ['nospecs' => $make],
             'make' => $make,
@@ -193,6 +221,8 @@ class CatalogController extends Controller {
 		if(!$model)
 			abort(404);
 
+        $this->composeMeta($spec, $type, $make, $model);
+
 		return view('pages.catalog.catalog-companies', [
             'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpecType($model, $spec, $type, 6)),
             'bread' => ['spec' => $spec, 'make' => $make, 'type' => $type, 'model' => $model],
@@ -217,6 +247,8 @@ class CatalogController extends Controller {
         if(!$model)
             abort(404);
 
+        $this->composeMeta($spec, null, $make, $model);
+
         return view('pages.catalog.catalog-companies', [
             'companies' => CompanyCatalog::present($this->companyRepository->getActiveByModelAndSpec($model, $spec, 6)),
             'bread' => ['spec' => $spec, 'make' => $make, 'model' => $model],
@@ -239,6 +271,9 @@ class CatalogController extends Controller {
 		$model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
 		if(!$model)
 			abort(404);
+
+        $this->composeMeta(null, $type, $make, $model);
+
 		return view('pages.catalog.catalog-companies', [
             'bread' => ['nospecs' => $make, 'type' => $type, 'model' => $model],
             'make' => $make,
@@ -259,6 +294,9 @@ class CatalogController extends Controller {
         $model = $this->carModelRepository->getFirstByNameAndMake($model, $make);
         if(!$model)
             abort(404);
+
+        $this->composeMeta(null, null, $make, $model);
+
         return view('pages.catalog.catalog-companies', [
             'bread' => ['nospecs' => $make, 'model' => $model],
             'make' => $make,
