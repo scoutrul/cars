@@ -2,7 +2,7 @@
 
 	<div class="popup_content">
 
-		<h3 class="popup_header popup_header--left">Добавление компании</h3>
+		<h3 class="popup_header">Добавление компании</h3>
 
 		<div class="popup_content--create-company">
 
@@ -146,7 +146,7 @@
 
 		<div id="company-signup-auth">
 
-			<h3 class="popup_header popup_header--left">Доступ к сайту</h3>
+			<h3 class="popup_header">Доступ к сайту</h3>
 
 			<div class="popup_field">
 
