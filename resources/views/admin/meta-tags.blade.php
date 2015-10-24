@@ -8,12 +8,15 @@
             $model = $('#model_id')
         ;
 
-        $dropdowns.css({
-            maxHeight: '300px',
-            overflowY: 'auto'
+        $make.multiselect('destroy').multiselect({
+                maxHeight: '300px',
+                enableFiltering: true
         });
 
-
+        $model.multiselect('destroy').multiselect({
+                maxHeight: '300px',
+                enableFiltering: true
+        });
 
         $make.on('change', function(){
             $.ajax({
