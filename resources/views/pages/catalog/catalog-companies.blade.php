@@ -47,9 +47,6 @@
                     @endif
                 @endif--}}
 
-				@if(!empty($meta_tag_description))
-					<div class="model-description">{{ $meta_tag_description->description }}</div>
-				@endif
 
 				@if(isset($models))
                     <div class="catalog-make-info">
@@ -58,7 +55,11 @@
                         @endif
 
                         <h1 class="catalog-make-title">{{$make->title}}</h1>
-                        <div class="catalog-make-description">{{$make->description}}</div>
+						@if(!empty($meta_tag_description))
+							<div class="catalog-make-description">{{ $meta_tag_description->description }}</div>
+						@elseif(!empty($make->description))
+							<div class="catalog-make-description">{{ $make->description }}</div>
+						@endif
                     </div>
 					<div class="makes makes--catalog">
 
