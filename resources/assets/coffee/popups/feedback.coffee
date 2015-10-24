@@ -2,7 +2,7 @@ SelectView = require '../inc/SelectView'
 ImageReader = require '../inc/ImageReader'
 Thumbnails = require '../inc/Thumbnails'
 
-$('#feedback').magnificPopup
+$('#feedback, .mention_add').magnificPopup
 
 	type : 'inline'
 	closeBtnInside: true

@@ -19,24 +19,25 @@ Admin::menu()->url('/')
 ->label('Главная')->icon('fa-dashboard')
 ->uses('\App\Http\Controllers\AdminController@index');
 
-Admin::menu(\App\Meta::class);
+Admin::menu(\App\Meta::class)->icon('fa-ticket');
 
-Admin::menu(\App\User::class);
+Admin::menu(\App\User::class)->icon('fa-users');
 
-Admin::menu(\App\Spec::class);
+Admin::menu(\App\Spec::class)->icon('fa-bookmark');
 
-Admin::menu(\App\Company::class);
+Admin::menu(\App\Company::class)->icon('fa-building');
 
-Admin::menu(\App\Feedback::class);
+Admin::menu(\App\Feedback::class)->icon('fa-comment');
 
-Admin::menu(\App\Request::class);
+Admin::menu(\App\Request::class)->icon('fa-folder');
 
-Admin::menu(\App\Page::class);
+Admin::menu(\App\Page::class)->icon('fa-book');
 
-Admin::menu(\App\Comment::class);
+Admin::menu(\App\Comment::class)->icon('fa-comments');
 
-Admin::menu()->url('makes')->uses('App\Http\Controllers\AdminController@makes')->label('Марки и модели');
+Admin::menu()->url('makes')->uses('App\Http\Controllers\AdminController@makes')->label('Марки и модели')->icon('fa-truck');
 
-Admin::menu(\App\CarModel::class);
+Admin::menu(\App\CarModel::class)->icon('fa-ticket');
 
 Admin::menu(\App\CType::class)->icon('fa-suitcase');
+Admin::menu(\App\MetaTag::class)->icon('fa-tags');
