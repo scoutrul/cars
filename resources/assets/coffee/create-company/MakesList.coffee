@@ -175,6 +175,7 @@ class Makes extends Backbone.View
 		$.ajax "#{@home}/#{@url}",
 			data:
 				id: id
+				first: $('.create-company_makes-models_item').length < 1
 		.done (makes) =>
 
 			@makesCollection.add makes

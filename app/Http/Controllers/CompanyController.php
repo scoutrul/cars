@@ -97,22 +97,27 @@ class CompanyController extends Controller {
 
 	public function attach_makes_models (\App\Company $company, $makesmodels) {
 
+
 		// check for validity
 		foreach ($makesmodels as $m) {
 			$make = (object)$m;
+
+			if($make->id != 0){
 			
-			if( ! \App\Make::isInType($make->id, $company->type_id))
-				return 'make not in type';
+				if( ! \App\Make::isInType($make->id, $company->type_id))
+					return 'make not in type';
 
 
-			if( $make->models != 0 )
+				if( $make->models != 0 ) {
 
-				foreach ($make->models as $model) {
+					foreach ($make->models as $model) {
 
-					if( ! \App\CarModel::isInMake($model, $make->id) )
-						return 'model is not in make';
+						if (! \App\CarModel::isInMake($model, $make->id))
+							return 'model is not in make';
 
+					}
 				}
+			}
 
 		}
 
@@ -124,9 +129,14 @@ class CompanyController extends Controller {
 
 			$make = (object)$m;
 
-			$company->makes()->attach($make->id);
+			if($make->id == 0){
+				$company->makes()->sync( \App\Make::lists('id') );
+			}else{
+				$company->makes()->attach($make->id);
+			}
 
-			if( $make->models == 0 ) {  // all models
+
+			if( $make->models == 0 || $make->models[0] == 0 ) {  // all models
 
 				$company->models()->attach( \App\CarModel::getModelsArrayByMake($make->id) );
 
@@ -232,7 +242,6 @@ class CompanyController extends Controller {
 		$this->create();
 
 		return route('profile');
-
 	}
 
 }
