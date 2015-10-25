@@ -16,4 +16,5 @@
 
 	@include('parts.feed.feedlist', ['feeds' => $feeds])
 
+
 @stop
