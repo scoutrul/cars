@@ -11,13 +11,28 @@ class Spec extends Model implements IHasMetaTitleAndDescription{
 
 	protected $table = 'specs';
 
-	protected $fillable = ['title', 'name', 'description', 'meta_title'];
+	protected $fillable = ['title', 'name', 'light_spec', 'description', 'meta_title'];
 
+
+	/**
+	 * Get companies of current rubric
+	 *
+	 * @return mixed
+	 */
 	public function companies() {
 		return $this->hasMany('App\Company', 'spec_id');
 	}
 
 
+	/**
+	 * Get if is light current spec
+	 *
+	 * @return mixed
+	 */
+	public function getLightAttribute()
+	{
+		return (bool)$this->light_spec;
+	}
 
 	/**
 	 * Get the array for admin panel with titles and ids

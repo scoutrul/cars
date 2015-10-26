@@ -26,6 +26,7 @@ class APIController extends Controller {
 	public function makes_by_type() {
 
 		$id = \Input::get('id');
+		$first = \Input::get('first');
 
 		$m = \App\Make::select('id', 'title')
 		->whereHas('models', function($q) use($id){
@@ -34,6 +35,13 @@ class APIController extends Controller {
 		->orderBy('soviet', 'DESC')
 		->orderBy('title', 'ASC')
 		->get();
+
+		if($first) {
+			$m->prepend([
+				'id' => 0,
+				'title' => 'Все марки',
+			]);
+		}
 
 		return $m;
 
@@ -76,8 +84,23 @@ class APIController extends Controller {
 	public function models_by_make() {
 
 		$id = \Input::get('id');
+		$type_id = \Input::get('typeId');
+		$first = \Input::get('first');
+
+		$all = [
+			'id' => 0,
+			'title' => 'Все модели',
+			'type_id' => $type_id,
+		];
+
 		$m = \App\CarModel::where('make_id', $id)
 		->select('id', 'title')->get();
+
+		if($first) {
+			$m->prepend($all);
+		}elseif($id == 0){
+			$m = [collect($all)];
+		}
 
 		return $m;
 	}

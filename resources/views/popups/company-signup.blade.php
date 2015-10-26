@@ -36,7 +36,7 @@
 
 							@foreach($specs as $spec)
 
-								<option value="{{ $spec->id }}" class="popup_option">
+								<option value="{{ $spec->id }}" class="popup_option" data-light="{{ intval($spec->light_spec) }}">
 									{{ $spec->title }}
 								</option>
 

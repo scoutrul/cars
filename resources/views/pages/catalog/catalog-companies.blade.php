@@ -118,7 +118,11 @@
 					</div>
 				@endif
 
-				@include('inc.found', ['make_id' => $make->id])
+				@if(!empty($make->id))
+					@include('inc.found', ['make_id' => $make->id])
+				@else
+					@include('inc.found')
+				@endif
 				
 				<div class="company-popup mfp-hide" id="company-main-popup"></div>
 

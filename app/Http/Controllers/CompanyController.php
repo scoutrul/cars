@@ -12,22 +12,28 @@ class CompanyController extends Controller {
 		if( $msg = $this->makeValidation() )
 			return $msg;
 
-		$image = $this->storeImage();
+		if( ! is_null(\Input::get('logo'))) {
+			$image = $this->storeImage();
 
-		if($image->failed)
-			return $image->messages;
+			if ($image->failed)
+				return $image->messages;
+		}
 
 		$company = new \App\Company(\Input::all());
 
-		$company->logo = $image->src;
+		$company->logo = !empty($image->src) ? $image->src : 'img/noavatar.png';
 
 		$company->user_id = \Auth::id();
-		$company->type_id = \Input::get('type');
+		$company->type_id = \Input::get('type') != 0 ? \Input::get('type') : null;
 		$company->spec_id = \Input::get('spec');
 		$company->ctype_id = \Input::get('cType');
 
-		if( $this->attach_makes_models($company, \Input::get('makesmodels')) )
-			return 'hello lamer';
+		if( ! \Input::get('light_spec')) {
+			if ($this->attach_makes_models($company, \Input::get('makesmodels')))
+				return 'hello lamer';
+		}else{
+			$company->save();
+		}
 
 		return route('profile');
 
@@ -41,16 +47,19 @@ class CompanyController extends Controller {
 		if( \Auth::user()->company )
 			return 'has company';
 
-		$validator = \Validator::make(\Input::all(), [
+		$rules = [
 			'name' => 'required',
 			'address' => 'required',
 			'phone' => 'required',
 			'about' => 'required',
-			'logo' => 'required',
-			'type' => 'required|exists:types,id',
-			'spec' => 'required|exists:specs,id',
 			'cType' => 'required',
-		]);
+		];
+
+		if( ! \Input::get('light_spec')){
+			$rules = array_merge($rules, ['type' => 'required|exists:types,id']);
+		}
+
+		$validator = \Validator::make(\Input::all(), $rules);
 
 		if($validator->fails())
 			return $validator->failed();
@@ -97,22 +106,27 @@ class CompanyController extends Controller {
 
 	public function attach_makes_models (\App\Company $company, $makesmodels) {
 
+
 		// check for validity
 		foreach ($makesmodels as $m) {
 			$make = (object)$m;
+
+			if($make->id != 0){
 			
-			if( ! \App\Make::isInType($make->id, $company->type_id))
-				return 'make not in type';
+				if( ! \App\Make::isInType($make->id, $company->type_id))
+					return 'make not in type';
 
 
-			if( $make->models != 0 )
+				if( $make->models != 0 ) {
 
-				foreach ($make->models as $model) {
+					foreach ($make->models as $model) {
 
-					if( ! \App\CarModel::isInMake($model, $make->id) )
-						return 'model is not in make';
+						if (! \App\CarModel::isInMake($model, $make->id))
+							return 'model is not in make';
 
+					}
 				}
+			}
 
 		}
 
@@ -124,9 +138,14 @@ class CompanyController extends Controller {
 
 			$make = (object)$m;
 
-			$company->makes()->attach($make->id);
+			if($make->id == 0){
+				$company->makes()->sync( \App\Make::lists('id') );
+			}else{
+				$company->makes()->attach($make->id);
+			}
 
-			if( $make->models == 0 ) {  // all models
+
+			if( $make->models == 0 || $make->models[0] == 0 ) {  // all models
 
 				$company->models()->attach( \App\CarModel::getModelsArrayByMake($make->id) );
 
@@ -232,7 +251,6 @@ class CompanyController extends Controller {
 		$this->create();
 
 		return route('profile');
-
 	}
 
 }

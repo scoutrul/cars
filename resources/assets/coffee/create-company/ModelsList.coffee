@@ -159,6 +159,8 @@ class ModelsList extends Backbone.View
 		$.ajax "#{@home}/#{@url}",
 			data:
 				id: @typeId
+				typeId: @options.realTypeId
+				first: this.$el.parents('.create-company_models').find('.create-company_model') < 1
 		.done (d) =>
 			console.log "real type", @options.realTypeId
 			d = (item for item in d when (typeof item isnt "undefined") && (parseInt(item.type_id) is parseInt(@options.realTypeId)))

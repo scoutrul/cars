@@ -294,3 +294,8 @@ input#make-icon-input {
 .selectBox-disabled a:hover {
   background-color: #fff;
 }
+
+.list-unstyled {
+  max-height: 300px;
+  overflow-y: auto;
+}

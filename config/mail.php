@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => gethostbyname('smtp.yandex.ru'),
+	'host' => 'smtp.yandex.ru',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'komtrans-club@yandex.ru', 'name' => 'Komtrans Club'],
+	'from' => ['address' => env('MAIL_USERNAME'), 'name' => 'Komtrans Club'],
 
 	/*
 	|--------------------------------------------------------------------------
