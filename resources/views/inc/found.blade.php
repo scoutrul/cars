@@ -8,17 +8,19 @@
 		</a>
 	@endif
 
-	<h3>Профильные организации {{$make->title}}</h3>
+	<h3>Профильные организации {{ !empty($make->title) ? $make->title : '' }}</h3>
 
-	@if(isset($spec_id))
+	@if(isset($spec_id) && !empty($make_id))
 		<div class="company-preview-list" id="catalog-companies"
 		data-make="{{ $make_id }}"
 		data-spec="{{ $spec_id }}"
 		>
-	@else
+	@elseif(isset($spec_id))
 		<div class="company-preview-list" id="catalog-companies"
 		data-make="{{ $make_id }}"
 		>
+	@else
+		<div class="company-preview-list" id="catalog-companies">
 	@endif
 
 		@for($i=0; $i < count($companies); $i++)

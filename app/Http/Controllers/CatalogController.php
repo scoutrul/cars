@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\CarModel;
+use App\Company;
 use App\Make;
 use App\Repository\CarModelRepository;
 use App\Repository\CompanyRepository;
@@ -66,6 +67,14 @@ class CatalogController extends Controller {
         $spec = $this->specsRepository->getForCatalogByName($name);
 		if(!$spec)
 			abort(404);
+
+        if($spec->light){
+            return view('pages.catalog.catalog-companies', [
+                'spec' => $spec,
+                'bread' => ['spec' => $spec],
+                'companies' => CompanyCatalog::present(Company::where('spec_id', $spec->id)->get()),
+            ]);
+        }
 
         $this->composeMeta($spec);
 

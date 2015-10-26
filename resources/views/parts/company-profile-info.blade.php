@@ -94,7 +94,10 @@
 				<ul class="profile-info_tags">
 					
 					<li>{{ $user->company->spec->title }}</li>
-					<li>{{ $user->company->type->title }}</li>
+
+					@if(!empty($user->company->type->title))
+						<li>{{ $user->company->type->title }}</li>
+					@endif
 				
 					@foreach($user->company->makes as $make)
 						<li>{{ $make->title }}</li>

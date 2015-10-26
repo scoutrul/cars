@@ -6,11 +6,6 @@ $('#create-company-button').magnificPopup
 	type: 'inline'
 	closeBtnInside: true
 
-
-specs = $('#create-company-spec')
-
-do specs.selectBox
-
 name = $ '#create-company-name'
 
 address = $ '#create-company-address'
@@ -81,9 +76,9 @@ class AddLogo
 		r.readAsDataURL(file)
 
 
-logo = new AddLogo '#create-company-logo-btn', 
-			'#create-company-logo',
-			'#create-company-logo-html'
+logo = new AddLogo '#create-company-logo-btn',
+	'#create-company-logo',
+	'#create-company-logo-html'
 
 
 class SelectType extends Backbone.View
@@ -94,7 +89,7 @@ class SelectType extends Backbone.View
 		do @$el.selectBox
 
 		@$el.change ->
-			
+
 			self.trigger 'changed', $(@).val()
 
 	error: ->
@@ -112,7 +107,6 @@ class SelectCType extends Backbone.View
 		do @$el.selectBox
 
 		@$el.change ->
-
 			self.trigger 'changed', $(@).val()
 
 	error: ->
@@ -127,9 +121,44 @@ types = new SelectType
 cType = new SelectCType
 	el: '#create-company-ctype'
 
-makes = new MakesList 
+makes = new MakesList
 	el: '#create-company_makes-models'
 	types: types
+
+
+
+class SelectSpec extends Backbone.View
+
+	initialize: ->
+		self = @
+
+		do @$el.selectBox
+
+		@$el.change ->
+			light = parseInt self.$el.find('option[value="'+self.get()+'"]').data('light')
+
+			if(light)
+				types.$el.parents('.popup_field').parent().hide()
+				makes.$el.hide()
+			else
+				types.$el.parents('.popup_field').parent().show()
+				makes.$el.show()
+
+	error: ->
+		@$el.selectBox('control').blink()
+
+	get: ->
+		@$el.val()
+
+	light: ->
+		parseInt @.$el.find('option[value="'+@.get()+'"]').data('light')
+
+
+specs = new SelectSpec
+	el: '#create-company-spec'
+
+
+
 
 submit = $ '#create-company-submit'
 
@@ -143,22 +172,26 @@ submit.click ->
 
 	if types.get()?
 		result.type = parseInt types.get()
+	else if specs.light()
+		result.type = 0
 	else
 		types.error()
 		return
 
+	# ===================================
 
 	if cType.get()?
 		result.cType = parseInt cType.get()
 	else
 		cType.error()
 		return
+
 	# ===================================
 
-	if specs.val()?
-		result.spec = parseInt specs.val()
+	if specs.get()?
+		result.spec = parseInt specs.get()
 	else
-		specs.selectBox('control').blink()
+		specs.error()
 		return
 
 	# ===================================
@@ -198,9 +231,10 @@ submit.click ->
 
 	if logo.get() isnt ''
 		result.logo = logo.get()
-	else
-		logolabel.blink()
-		return
+
+	# ===================================
+
+	result.light_spec = specs.light()
 
 	# ===================================
 
@@ -236,28 +270,28 @@ submit.click ->
 	$(@).preload('start')
 
 	$.ajax "#{$('body').data('home')}/#{url}",
-			headers:
-				'X-CSRF-TOKEN' : $('body').data 'csrf'
-			method: 'POST'
-			data: result
-		.done (response) =>
+		headers:
+			'X-CSRF-TOKEN' : $('body').data 'csrf'
+		method: 'POST'
+		data: result
+	.done (response) =>
 
-			console.log response
+		console.log response
 
-			$(@).preload('stop')
+		$(@).preload('stop')
 
-			if companySignUp.length
+		if companySignUp.length
 
-				if response.search('http') isnt -1
-					location.href = response
-				else
-					$.magnificPopup.instance.close()
-					$.alert 'Пользователь с таким логином уже существует.'
-
-
+			if response.search('http') isnt -1
+				location.href = response
 			else
+				$.magnificPopup.instance.close()
+				$.alert 'Пользователь с таким логином уже существует.'
 
-				setTimeout ->
-					$.magnificPopup.instance.close()
-					$.alert 'Ваша компания добавлена и ожидает проверки.'
-				, 1000
+
+		else
+
+			setTimeout ->
+				$.magnificPopup.instance.close()
+				$.alert 'Ваша компания добавлена и ожидает проверки.'
+			, 1000

@@ -17,6 +17,8 @@ Admin::model(App\Company::class)->title('Компании')
 	Column::lists('makes.title', 'Марки');
 	Column::lists('models.title', 'Модели');
 
+	AssetManager::addStyle(asset('/css/admin.css'));
+
 })->form(function ()
 {
 

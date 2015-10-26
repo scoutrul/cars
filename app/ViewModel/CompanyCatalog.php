@@ -38,15 +38,21 @@ class CompanyCatalog {
         $arr['address'] = $company->address;
 
         $t[] = $company->spec->title;
-        $t[] = $company->type->title;
 
-        foreach($company->makes as $k => $v){
+        if(!empty($company->type->title)) {
+            $t[] = $company->type->title;
 
-            $t[] = $v->title;
+            foreach ($company->makes as $k => $v) {
 
+                $t[] = $v->title;
+
+            }
+
+            $arr['tags'] = $t;
+        }else{
+            $arr['tags'] = [];
         }
 
-        $arr['tags'] = $t;
         return $arr;
     }
 

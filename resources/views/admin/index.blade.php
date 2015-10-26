@@ -1,6 +1,110 @@
-<div style="padding:1px">
-	<div style="font-size:20px">Новых заказов <b>{{ $requests }}</b></div>
-	<div style="font-size:20px">Новых отзывов <b>{{ $feedbacks }}</b></div>
-	<div style="font-size:20px">Новых комментариев <b>{{ $comments }}</b></div>
-	<div style="font-size:20px">Новых компаний <b>{{ $companies }}</b></div>
+<style>
+	@media(min-width: 1280px){
+		.wide{
+			padding: 0;
+		}
+	}
+</style>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Главная</h1>
+	</div>
+</div>
+
+<div class="row">
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-red">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-shopping-cart fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ $requests }}</div>
+						<div>Новых заказов</div>
+					</div>
+				</div>
+			</div>
+			<a href="{{ url('admin/requests') }}">
+				<div class="panel-footer">
+					<span class="pull-left">Заказы</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-green">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-comment fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ $feedbacks }}</div>
+						<div>Новых отзывов</div>
+					</div>
+				</div>
+			</div>
+			<a href="{{ url('admin/feedbacks') }}">
+				<div class="panel-footer">
+					<span class="pull-left">Отзывы</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<div class="col-lg-3 col-md-6 wide">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-comments fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ $comments }}</div>
+						<div>Новых комментариев</div>
+					</div>
+				</div>
+			</div>
+			<a href="{{ url('admin/comments') }}">
+				<div class="panel-footer">
+					<span class="pull-left">Комментарии</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+
+
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-yellow">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-building fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ $companies }}</div>
+						<div>Новых компаний</div>
+					</div>
+				</div>
+			</div>
+			<a href="{{ url('admin/companies') }}">
+				<div class="panel-footer">
+					<span class="pull-left">Компании</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
 </div>
