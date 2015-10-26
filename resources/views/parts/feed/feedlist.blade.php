@@ -51,4 +51,12 @@
 
 	@endforeach
 
+	
+</div>
+
+<div class="mention_add feedback_button clear_button"
+href="{{ Auth::guest() ? '#sign-up-popup' : 
+		( Auth::user()->is_ready() ? '#feedback-popup' : '#fill-up-profile-popup' ) }}" >
+	
+	Добавить отзыв
 </div>

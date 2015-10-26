@@ -4,6 +4,23 @@
 
 		<h3 class="popup_header">Добавление компании</h3>
 
+		<div class="popup_info">
+			<input type="checkbox" class="popup_search_checkbox" id="popup_checkbox">
+			<label for="popup_checkbox" class="popup_search_label">
+				<svg class="svg_info" xmlns="http://www.w3.org/2000/svg" fill="#000000" height="16" viewBox="0 0 24 24" width="16">
+				  <path d="M0 0h24v24H0z" fill="none"/>
+				  <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
+				</svg>
+				<span>Преимущества регистрации компании</span>
+				<div class="info_content">
+				Найдите своего клиена, заявив о себе на страницах сайта!<br><br>
+				Приглашаем организации, специализирующиеся на грузовом коммерческом транспорте, в каталог "Комтранс". <br><br>
+				Сегодня регистрация абсолютно <b>бесплатна</b>! 
+								<hr>
+				</div>
+			</label>
+		</div>
+
 		<div class="popup_content--create-company">
 
 			<div class="create-company_higher">

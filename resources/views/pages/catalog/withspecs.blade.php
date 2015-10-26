@@ -4,6 +4,7 @@
 
 	<h1 class="catalog_type">{{ $spec->title }}</h1>
 
+
 	@if(!empty($meta_tag_description))
 		<div class="model-description">{{ $meta_tag_description->description }}</div>
 	@elseif($meta_description)

@@ -49,6 +49,8 @@
 			<textarea id="comments-textarea" placeholder="Комментарий..." class="comments_textarea"></textarea>
 			<div id="comments-button" class="comments_send-button">Отправить</div>
 		</div>
+		@else
+		Участвовать в комментариях могут только зарегистрированные пользователи.
 	@endif
 
 	@include('templates.comment-template')
