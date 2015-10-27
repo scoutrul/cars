@@ -6,4 +6,6 @@ public/img/makes/*
 public/img/room*
 config/mail.php
 
+.idea
+
 *.sublime-*
