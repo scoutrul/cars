@@ -7,5 +7,6 @@ public/img/room*
 config/mail.php
 
 .idea
+.gitignore
 
 *.sublime-*
