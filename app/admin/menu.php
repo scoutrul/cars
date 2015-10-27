@@ -48,7 +48,7 @@ Admin::menu()->label('
 <!-- Yandex.Metrika informer -->
 <a href="https://metrika.yandex.ru/stat/?id=32453035&amp;from=informer"
 target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/32453035/3_0_FFB953FF_FF9933FF_1_pageviews"
-style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:32453035,lang:'ru'});return false}catch(e){}" /></a>
+style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:32453035,lang:\'ru\'});return false}catch(e){}" /></a>
 <!-- /Yandex.Metrika informer -->
 
 <!-- Yandex.Metrika counter -->
