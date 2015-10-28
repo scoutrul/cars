@@ -3,9 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Traits\MailTrait;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller {
+
+	use MailTrait;
 
 	public function create() {
 
@@ -49,9 +52,10 @@ class RequestController extends Controller {
 
 		$request->save();
 
-		return $this->createRooms($request);
+		// send email to admin
+		$this->newRequest($request);
 
-		return $request;
+		return $this->createRooms($request);
 
 	}
 
