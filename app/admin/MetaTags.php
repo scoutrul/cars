@@ -21,7 +21,7 @@ Admin::model(App\MetaTag::class)->title('Мета теги и описание')
         FormItem::select('make_id', 'Марка авто')->list(\App\Make::class);
         FormItem::select('model_id', 'Модель авто')->list(\App\CarModel::class);
         FormItem::text('tags', 'Ключевые слова');
-        FormItem::textarea('description', 'Описание');
+        FormItem::ckeditor('description', 'Описание');
 
         FormItem::view('admin.meta-tags');
     });

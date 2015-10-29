@@ -16,10 +16,10 @@
 @endif
 
 @if(!empty($meta_tag_description))
-    <meta name="description" content="{{ $meta_tag_description->description }}">
+    <meta name="description" content="{!! $meta_tag_description->description !!}">
     @if(!empty($meta_tag_description->tags))
-        <meta name="keywords" content="{{ $meta_tag_description->tags }}">
+        <meta name="keywords" content="{!! $meta_tag_description->description !!}">
     @endif
 @elseif(isset($meta_description))
-    <meta name="Description" content="{{$meta_description}}">
+    <meta name="Description" content="{!! $meta_description !!}">
 @endif
