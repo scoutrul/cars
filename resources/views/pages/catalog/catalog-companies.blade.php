@@ -47,7 +47,7 @@
                     @endif
                 @endif--}}
 				@if(!isset($models) && !empty($meta_tag_description))
-					<div class="catalog-make-description">{{ $meta_tag_description->description }}</div>
+					<div class="catalog-make-description">{!! $meta_tag_description->description !!}</div>
 				@elseif(!empty($model->description))
 					<div class="catalog-make-description">{{ $model->description }}</div>
 				@endif
@@ -61,7 +61,7 @@
 
                         <h1 class="catalog-make-title">{{$make->title}}</h1>
 						@if(!empty($meta_tag_description))
-							<div class="catalog-make-description">{{ $meta_tag_description->description }}</div>
+							<div class="catalog-make-description">{!! $meta_tag_description->description !!}</div>
 						@elseif(!empty($make->description))
 							<div class="catalog-make-description">{{ $make->description }}</div>
 						@endif
