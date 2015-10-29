@@ -37,9 +37,8 @@ Admin::menu(\App\Comment::class)->icon('fa-comments');
 
 Admin::menu()->url('makes')->uses('App\Http\Controllers\AdminController@makes')->label('Марки и модели')->icon('fa-truck');
 
-Admin::menu(\App\CarModel::class)->icon('fa-ticket');
-
 Admin::menu(\App\CType::class)->icon('fa-suitcase');
+
 Admin::menu(\App\MetaTag::class)->icon('fa-tags');
 
 

@@ -6,7 +6,7 @@ namespace App\Traits;
 
 use App\MetaTag;
 
-trait Meta {
+trait MetaTrait {
 
 
     /**

@@ -1,8 +1,11 @@
 <?php namespace App;
 
+use App\Traits\MailTrait;
 use \SleepingOwl\Models\SleepingOwlModel as Model;
 
 class Company extends Model {
+
+    use MailTrait;
 
 	protected $table = 'companies';
 
@@ -66,6 +69,20 @@ class Company extends Model {
 	public function getTitleAttribute()
 	{
 		return ( ! is_null($this->cType) && $this->cType->display) ? $this->cType->name . ' ' . $this->name : $this->name;
+	}
+
+
+
+
+
+	protected static function boot()
+	{
+		parent::boot();
+
+		static::updating (function ($instance)
+		{
+			static::moderateCompany($instance);
+		});
 	}
 
 

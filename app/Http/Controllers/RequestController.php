@@ -3,16 +3,25 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Traits\MailTrait;
+use App\User;
 use Illuminate\Http\Request;
 
 class RequestController extends Controller {
 
-	public function create() {
+	use MailTrait;
+
+	public function create(Request $request) {
+
+        $input = (object)\Input::all();
+
+        if( ! \Auth::check() && !empty($input->email) && !empty($input->pass) ){
+            $this->signUp($request->only(['email', 'pass']));
+        }
 
 		if( ! \Auth::user()->is_ready() )
 			return 'hello lamer';
 
-		$input = (object)\Input::all();
 
 		$request = new \App\Request;
 
@@ -49,9 +58,10 @@ class RequestController extends Controller {
 
 		$request->save();
 
-		return $this->createRooms($request);
+		// send email to admin
+		$this->newRequest($request);
 
-		return $request;
+		return $this->createRooms($request);
 
 	}
 
@@ -71,15 +81,49 @@ class RequestController extends Controller {
 			$room->company_id = $company->id;
 			$room->save();
 
-			\Mail::queue('emails.request', [
-				'request' => $request,
-				'room' => $room
-			], function($msg) use ($company){
-				$msg->to($company->user->email)
-				->subject('Новый заказ | Комтранс');
-			});
+			$this->companyRequest($request, $company, $room);
 		}
 
 	}
+
+
+    /**
+     * Find Or Create User and Auth him
+     *
+     * @param $data
+     * @return bool
+     */
+    protected function signUp($data)
+    {
+
+        $user = User::where('email', $data['email'])->first();
+
+        if(!$user) {
+
+            $validator = \Validator::make(
+                ['email' => $data['email']],
+                ['email' => 'required|email|unique:users']
+            );
+
+            if ($validator->fails()) {
+                return false;
+            }
+
+            $code = md5(\Hash::make($data['email']));
+
+            $user = \App\User::create([
+                'email' => $data['email'],
+                'password' => \Hash::make($data['pass']),
+                'confirmation_code' => $code
+            ]);
+
+            $this->verifyUser($code, $user);
+        }
+
+        \Auth::login($user);
+
+        return $user;
+
+    }
 
 }

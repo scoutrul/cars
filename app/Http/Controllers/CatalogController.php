@@ -8,14 +8,14 @@ use App\Repository\CompanyRepository;
 use App\Repository\MakesRepository;
 use App\Repository\SpecsRepository;
 use App\Repository\TypeRepository;
-use App\Traits\Meta;
+use App\Traits\MetaTrait;
 use App\Type;
 use App\ViewModel\CompanyCatalog;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller {
 
-    use Meta;
+    use MetaTrait;
 
     /**
      * @var MakesRepository

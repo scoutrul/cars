@@ -13,7 +13,7 @@
 			персональные предложения от актуальных компаний</p>
 
 		<div id="search" class="search_button"
-		href="{{ Auth::guest() ? '#sign-up-popup' : 
+		href="{{ Auth::guest() ? '#search-signup-popup' :
 				( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
 			Найти деталь
 		</div>
@@ -21,6 +21,10 @@
 
 	</div>
 
-	@include('popups.search')
+	@if(Auth::check())
+		@include('popups.search')
+	@else
+		@include('popups.search-signup')
+	@endif
 
 @endif

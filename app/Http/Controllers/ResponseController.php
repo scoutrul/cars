@@ -2,11 +2,14 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Traits\MailTrait;
 use \Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
 class ResponseController extends Controller {
+
+	use MailTrait;
 
 	public function create() {
 
@@ -64,14 +67,8 @@ class ResponseController extends Controller {
 
 		}
 
-		\Mail::queue('emails.response', [
-			'request' => $room->request,
-			'room' => $room,
-			'company' => $company
-		], function($msg) use ($room){
-			$msg->to($room->request->user->email)
-			->subject('Новый заказ | Комтранс');
-		});
+        $this->adminResponse($room, $company);
+        $this->clientResponse($room, $company);
 
 	}
 

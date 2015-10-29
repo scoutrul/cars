@@ -23,32 +23,28 @@ class TypeView extends Backbone.View
 		'click': 'changeState'
 
 	changeState: =>
-		if @state
-			do @deactivate
-
-			@model.trigger('pass')
-		else
+		if !@state
 			do @activate
 
 	activate: =>
-		$('#catalog-makes').find('a').each (i, element) =>
-			element.href = element.href.replace "/make/", "/make/"+@model.attributes.name+'/'
-		$('#catalog-specmakes').find('a').each (i, element) =>
-			element.href = element.href.replace /catalog\/(.*)\//, "catalog/$1"+@model.attributes.name+'/'
-		@model.trigger('activate', @model)
+			$('#catalog-makes').find('a').each (i, element) =>
+				element.href = element.href.replace "/make/", "/make/"+@model.attributes.name+'/'
+			$('#catalog-specmakes').find('a').each (i, element) =>
+				element.href = element.href.replace /catalog\/(.*)\//, "catalog/$1"+@model.attributes.name+'/'
+			@model.trigger('activate', @model)
 
-		@$el.addClass @class
+			@$el.addClass @class
 
-		@state = true
+			@state = true
 
 	deactivate: =>
-		@$el.removeClass @class
-		$('#catalog-makes').find('a').each (i, element) =>
-			element.href = element.href.replace @model.attributes.name+"/", ""
-		$('#catalog-specmakes').find('a').each (i, element) =>
-			element.href = element.href.replace @model.attributes.name, ""
+      @$el.removeClass @class
+      $('#catalog-makes').find('a').each (i, element) =>
+        element.href = element.href.replace @model.attributes.name+"/", ""
+      $('#catalog-specmakes').find('a').each (i, element) =>
+        element.href = element.href.replace @model.attributes.name, ""
 
-		@state = false
+      @state = false
 
 
 class TypeList extends Backbone.View
