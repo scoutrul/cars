@@ -1,8 +1,11 @@
 <?php namespace App;
 
+use App\Traits\MailTrait;
 use \SleepingOwl\Models\SleepingOwlModel as Model;
 
 class Request extends Model {
+
+    use MailTrait;
 
 	protected $table = 'requests';
 
@@ -35,5 +38,20 @@ class Request extends Model {
 	public function rooms() {
 		return $this->hasMany('App\Room', 'request_id');
 	}
+
+
+
+
+	protected static function boot()
+	{
+		parent::boot();
+
+		static::updating (function ($instance)
+		{
+            static::moderateRequest($instance);
+		});
+	}
+
+
 
 }

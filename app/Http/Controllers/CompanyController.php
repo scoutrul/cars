@@ -3,9 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Traits\MailTrait;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller {
+
+	use MailTrait;
 
 	public function create() {
 
@@ -34,6 +37,8 @@ class CompanyController extends Controller {
 		}else{
 			$company->save();
 		}
+
+        $this->newCompany($company);
 
 		return route('profile');
 
@@ -226,7 +231,6 @@ class CompanyController extends Controller {
 		$validator = \Validator::make(
 			['email' => $input->email],
 			['email' => 'required|email|unique:users']
-
 		);
 
 		if($validator->fails()){
@@ -243,10 +247,7 @@ class CompanyController extends Controller {
 
 		\Auth::login($user);
 
-		\Mail::queue('emails.verify', ['code' => $code], function($msg) use ($user){
-			$msg->to($user->email)
-			->subject('Подтверждение почты');
-		});
+		$this->verifyUser($code, $user);
 
 		$this->create();
 

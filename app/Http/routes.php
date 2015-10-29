@@ -229,7 +229,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'api'], function(){
 
 	});
 
-	Route::group(['prefix' => 'request', 'middleware' => 'auth'], function() {
+	Route::group(['prefix' => 'request',], function() {
 
 		post('create', ['uses' => 'RequestController@create']);
 

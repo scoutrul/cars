@@ -33,6 +33,10 @@ isNewLabel = $('#search-new + label')
 
 isOldLabel = $('#search-old + label')
 
+searchSignUp = $ '#search-signup-auth'
+
+signUpSearchCheck = $ '#sign-up-search-check'
+
 button = $ '#search-button'
 
 button.click ->
@@ -84,6 +88,33 @@ button.click ->
 	else
 		more.blink()
 		return
+
+
+	if searchSignUp.length
+		if signUpSearchCheck.prop('checked') isnt true
+			return
+
+		email = searchSignUp.find '.search-signup-email'
+		pass = searchSignUp.find '.search-signup-pass'
+
+		if email.val() is ''
+			email.blink()
+			return
+		else
+			result.email = email.val()
+
+		if pass.val() is ''
+			pass.blink()
+			return
+		else
+			result.pass = pass.val()
+
+		pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i
+
+		if not pattern.test email.val()
+			email.blink()
+			return
+
 
 	$(@).preload 'start'
 
