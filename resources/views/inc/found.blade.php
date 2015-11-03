@@ -69,7 +69,7 @@
 
 
 	<a class="search_button" style="margin: auto"
-		href="{{ Auth::guest() ? '#sign-up-popup' :
+		href="{{ Auth::guest() ? '#search-signup-popup' :
 			( Auth::user()->is_ready() ? '#search-popup' : '#fill-up-profile-popup' ) }}">
 		Поиск запчастей
 	</a>
