@@ -19,6 +19,7 @@ $redlink = #FF4444
 $bluelink = #4e61eb
 
 
+
 marginBar()
 	margin 0 0 15px 0
 
@@ -36,7 +37,7 @@ button(color)
 	cursor pointer
 	border 4px solid color
 	user-select none
-	transition .2s ease
+	transition .1s ease
 	box-shadow 0 10px 10px -10px rgba(0, 0, 55, 0.3)
 	
 button--hover(color)
@@ -72,6 +73,41 @@ button__add--orange()
 		cursor pointer
 		background-image -webkit-linear-gradient(top,#FFD247 0,#FFDA61 50%,#FFD756 51%,#F3DF6D 100%)
 			
+button__add--white()
+	margin auto
+	border-radius 2px
+	border none
+	center-text()
+	font-size 14px
+	width 170px
+	height 40px
+	letter-spacing .03em
+	color #5E5E5E
+	border 1px solid #FFF
+	transition .1s
+	
+	
+	&:hover 
+		cursor pointer	
+
+
+button__add--red()
+	margin 10px 0
+	border-radius 2px
+	border none
+	center-text()
+	font-size 14px
+	width 170px
+	height 40px
+	letter-spacing .03em
+	color #FFF
+	background-image -webkit-linear-gradient(top,#F36d6D 0,#FF6161 50%,#FF0000 100%)
+	box-shadow 0 10px 10px -10px rgba(0,0,55, 0.3), 0 1px 0 0 rgb(189, 157, 81)
+	
+	&:hover 
+		cursor pointer
+		background-image -webkit-linear-gradient(top,#FFD247 0,#FFDA61 50%,#FFD756 51%,#F3DF6D 100%)
+			
 		
 			
 placeholder()
@@ -88,21 +124,10 @@ block-border()
 	border 1px solid #BBBBBB
 	border-radius 2px
 	box-shadow 0 10px 10px -10px rgba(0,0,55, 0.3)
+	min-height 220px
 		
 	
 $header
 	margin 25px 0 0 35px
 	
 
-.sticky.is_stuck
-	z-index 10
-	
-.clear_button
-	top 0 !important
-	right 0 !important
-	left 0 !important
-	position relative !important
-	margin auto !important
-	
-	&:hover
-		color #FFF !important

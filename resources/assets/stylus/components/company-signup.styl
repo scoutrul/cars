@@ -1,5 +1,4 @@
 .company-signup
-	block-border()
 	background-color white
 	padding 20px 40px
 	display flex
@@ -11,6 +10,11 @@
 	marginBar()
 	outline 1px solid rgb(252, 227, 128)
 	outline-offset -5px
+	border 1px solid #BBBBBB
+	border-radius 2px
+	box-shadow 0 10px 10px -10px rgba(0,0,55, 0.3)
+	min-height 220px
+	
 	
 	&_h3
 		font-size 16px
@@ -24,7 +28,10 @@
 		font-size 12px
 		
 	&_button
-		button__add--orange()
+		button__add--white()
+		
+		&:hover
+			background-color rgba(255, 255, 255, 0.26)
 			
 		
 		&_list_add
