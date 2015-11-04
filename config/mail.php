@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'komtrans-club@yandex.ru', 'name' => 'Komtrans Club'],
+	'from' => ['address' => env('MAIL_USERNAME'), 'name' => 'Komtrans Club'],
 
 	/*
 	|--------------------------------------------------------------------------
