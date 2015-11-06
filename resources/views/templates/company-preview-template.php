@@ -1,12 +1,12 @@
-<script id="company-preview-template" type="text/x-handlebars-template">
-
+<script id="company-preview-template" type="text/x-handlebars-template" itemscope itemtype="http://schema.org/Organization" >
+<div itemscope itemtype="http://schema.org/LocalBusiness">
 	<div class="company-preview_logo"
 		style="background-image: {{logo}}"
 	></div>
 	<div class="company-preview_info">
-		<h3>{{name}}</h3>
-		<h5><b>Адрес:</b> {{address}}</h5>
-		<h5><b>Описание:</b> {{excerpt}}</h5>
+		<h3><span class="itemprop-name" itemprop="name">{{name}}</span></h3>
+		<h5><b>Адрес:</b> <span class="itemprop-adress" itemprop="streetAddress">{{address}}</span></h5>
+		<h5><b>Описание:</b> <span class="itemprop-description" itemprop="description">{{excerpt}}</span></h5>
 	</div>
 
 	<div class="company-preview_more">
@@ -17,5 +17,5 @@
 		</svg>
 		<span>Подробнее</span>
 	</div>
-
+</div>
 </script>
