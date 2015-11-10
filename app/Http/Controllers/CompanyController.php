@@ -30,12 +30,11 @@ class CompanyController extends Controller {
 		$company->type_id = \Input::get('type') != 0 ? \Input::get('type') : null;
 		$company->spec_id = \Input::get('spec');
 		$company->ctype_id = \Input::get('cType');
+		$company->save();
 
 		if( ! \Input::get('light_spec')) {
 			if ($this->attach_makes_models($company, \Input::get('makesmodels')))
-				return 'hello lamer';
-		}else{
-			$company->save();
+				return 'hello lamer 1';
 		}
 
         $this->newCompany($company);
@@ -116,18 +115,20 @@ class CompanyController extends Controller {
 		foreach ($makesmodels as $m) {
 			$make = (object)$m;
 
+
 			if($make->id != 0){
 			
 				if( ! \App\Make::isInType($make->id, $company->type_id))
 					return 'make not in type';
 
-
 				if( $make->models != 0 ) {
 
 					foreach ($make->models as $model) {
 
-						if (! \App\CarModel::isInMake($model, $make->id))
-							return 'model is not in make';
+                        if($model != 0) {
+                            if (!\App\CarModel::isInMake($model, $make->id))
+                                return 'model is not in make';
+                        }
 
 					}
 				}
@@ -136,8 +137,6 @@ class CompanyController extends Controller {
 		}
 
 		// attach
-
-		$company->save();
 
 		foreach ($makesmodels as $m) {
 
@@ -179,11 +178,11 @@ class CompanyController extends Controller {
 		$company = \Auth::user()->company;
 
 		if($image->height() < 115 or $image->height() > 7000) {
-			return 'hello lamer';
+			return 'hello lamer 2';
 		}
 
 		if($image->width() < 115 or $image->width() > 7000) {
-			return 'hello lamer';
+			return 'hello lamer 3';
 		}
 
 		$image->crop( (int)$coords->w, (int)$coords->h, (int)$coords->x, (int)$coords->y );
@@ -234,7 +233,7 @@ class CompanyController extends Controller {
 		);
 
 		if($validator->fails()){
-			return 'hello lamer';
+			return 'hello lamer 4';
 		}
 
 		$code = md5(\Hash::make($input->email));
