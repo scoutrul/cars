@@ -115,18 +115,20 @@ class CompanyController extends Controller {
 		foreach ($makesmodels as $m) {
 			$make = (object)$m;
 
+
 			if($make->id != 0){
 			
 				if( ! \App\Make::isInType($make->id, $company->type_id))
 					return 'make not in type';
 
-
 				if( $make->models != 0 ) {
 
 					foreach ($make->models as $model) {
 
-						if (! \App\CarModel::isInMake($model, $make->id))
-							return 'model is not in make';
+                        if($model != 0) {
+                            if (!\App\CarModel::isInMake($model, $make->id))
+                                return 'model is not in make';
+                        }
 
 					}
 				}
