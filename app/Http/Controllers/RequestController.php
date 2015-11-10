@@ -20,7 +20,7 @@ class RequestController extends Controller {
         }
 
 		if( ! \Auth::user()->is_ready() )
-			return 'hello lamer';
+			return 'hello lamer0';
 
 
 		$request = new \App\Request;
@@ -28,7 +28,7 @@ class RequestController extends Controller {
 		$request->type_id = $input->type;
 
 		if( ! $input->new && ! $input->old )
-			return 'hello lamer';
+			return 'hello lamer1';
 		else {
 			$request->new = $input->new;
 			$request->old = $input->old;
@@ -37,20 +37,20 @@ class RequestController extends Controller {
 		if(\App\Make::isInType($input->make, $input->type))
 			$request->make_id = $input->make;
 		else
-			return 'hello lamer';
+			return 'hello lamer2';
 
 		if(\App\CarModel::isInMake($input->model, $input->make))
 			$request->model_id = $input->model;
 		else
-			return 'hello lamer';
+			return 'hello lamer3';
 
 		if( ! $input->year )
-			return 'hello lamer';
+			return 'hello lamer4';
 		else
 			$request->year = $input->year;
 
 		if( ! $input->more )
-			return 'hello lamer';
+			return 'hello lamer5';
 		else
 			$request->text = $input->more;
 
