@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => gethostbyname('smtp.yandex.ru'),
+	'host' => 'smtp.yandex.ru',
 
 	/*
 	|--------------------------------------------------------------------------
