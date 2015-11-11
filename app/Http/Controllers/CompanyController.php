@@ -80,12 +80,12 @@ class CompanyController extends Controller {
 		$result->messages = array();
 		$result->failed = false;
 
-		if($image->height() < 115 or $image->height() > 7000) {
+		if($image->height() < 35 or $image->height() > 7000) {
 			$result->messages[] = 'height doesnt fits';
 			$result->failed = true;
 		}
 
-		if($image->width() < 115 or $image->width() > 7000) {
+		if($image->width() < 35 or $image->width() > 7000) {
 			$result->messages[] = 'width doesnt fits';
 			$result->failed = true;
 		}
